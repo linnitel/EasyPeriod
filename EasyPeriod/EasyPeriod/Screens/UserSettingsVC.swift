@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Foundation
 
 class UserSettingsVC: UIViewController {
 
-	weak public var coordinator: Coordinator?
+	weak public var coordinator: AppCoordinator?
+	public var isFirstLaunch: Bool?
 
 	private lazy var periodLengthTextField: UITextField = {
 		let field = UITextField(frame: CGRect(x: self.view.bounds.minX + 16, y: self.view.bounds.midY - 100, width: self.view.bounds.width - 32, height: 50))
@@ -48,15 +50,11 @@ class UserSettingsVC: UIViewController {
 		return button
 	}()
 
-//	private lazy var dateRrange: UITextView = {
-//
-//	}
-
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.setupViews()
+		self.setupNavigationBar()
 	}
-
 
 	private func setupViews() {
 		view.backgroundColor = .white
@@ -65,6 +63,16 @@ class UserSettingsVC: UIViewController {
 		view.addSubview(self.lastPeriodDate)
 		view.addSubview(self.datePicker)
 		view.addSubview(self.buttonCalculate)
+	}
+
+	private func setupNavigationBar() {
+		if let isFirstLaunch = self.isFirstLaunch,
+		   !isFirstLaunch {
+		}
+	}
+
+	@objc func action() {
+		self.coordinator?.openCalendar()
 	}
 }
 

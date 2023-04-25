@@ -29,11 +29,25 @@ class AppCoordinator: Coordinator {
 		if isFirstLaunch {
 			let userSettingsVC = UserSettingsVC()
 			userSettingsVC.coordinator = self
+			userSettingsVC.isFirstLaunch = true
 			self.router?.setViewControllers([userSettingsVC], animated: false)
 		} else {
 			let calendarVC = CalendarVC()
 			calendarVC.coordinator = self
 			self.router?.setViewControllers([calendarVC], animated: false)
 		}
+	}
+
+	func openSettings() {
+		let userSettingsVC = UserSettingsVC()
+		userSettingsVC.coordinator = self
+		userSettingsVC.isFirstLaunch = false
+		self.router?.pushViewController(userSettingsVC, animated: true)
+	}
+
+	func openCalendar() {
+		let calendarVC = CalendarVC()
+		calendarVC.coordinator = self
+		self.router?.pushViewController(calendarVC, animated: true)
 	}
 }

@@ -10,7 +10,7 @@ import UIKit
 
 class CalendarVC: UIViewController {
 	
-	weak public var coordinator: Coordinator?
+	weak public var coordinator: AppCoordinator?
 
 	private lazy var periodLengthTextField: UITextField = {
 		let field = UITextField(frame: CGRect(x: self.view.bounds.minX + 16, y: self.view.bounds.midY - 100, width: self.view.bounds.width - 32, height: 50))
@@ -30,6 +30,7 @@ class CalendarVC: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.setupViews()
+		self.setupNavigationBar()
 	}
 
 	private func setupViews() {
@@ -39,5 +40,20 @@ class CalendarVC: UIViewController {
 	}
 
 	private func setupNavigationBar() {
+		let navigationRightItem = UIImage(systemName: "gearshape.fill")
+
+		navigationItem.rightBarButtonItem = UIBarButtonItem(
+			image: navigationRightItem,
+			style: .plain,
+			target: self,
+			action: #selector(action)
+		)
+		navigationItem.rightBarButtonItem?.tintColor = UIColor(
+			cgColor:  CGColor(red: 256, green: 0, blue: 25, alpha: 100)
+		)
+	}
+
+	@objc func action() {
+		self.coordinator?.openSettings()
 	}
 }
