@@ -12,18 +12,8 @@ class CalendarVC: UIViewController {
 	
 	weak public var coordinator: AppCoordinator?
 
-	private lazy var periodLengthTextField: UITextField = {
-		let field = UITextField(frame: CGRect(x: self.view.bounds.minX + 16, y: self.view.bounds.midY - 100, width: self.view.bounds.width - 32, height: 50))
-		field.placeholder = "Period Length: "
-		field.backgroundColor = .white
-		field.layer.borderColor = CGColor(red: 256, green: 0, blue: 25, alpha: 100)
-		field.layer.borderWidth = 1
-		field.layer.cornerRadius = 8
-		return field
-	}()
-
-	private lazy var lastPeriodDateStart: UILabel = {
-		let label = UILabel(frame: CGRect(x: self.view.bounds.minX + 16, y: self.view.bounds.midY - 100, width: self.view.bounds.width - 32, height: 50))
+	private lazy var nextPeriodDateStart: UILabel = {
+		let label = UILabel(frame: CGRect(x: self.view.bounds.minX + 16, y: self.view.bounds.midY - 100, width: self.view.bounds.width - 32, height: 200))
 		return label
 	}()
 
@@ -36,7 +26,7 @@ class CalendarVC: UIViewController {
 	private func setupViews() {
 		view.backgroundColor = .white
 		view.frame = UIScreen.main.bounds
-		view.addSubview(self.periodLengthTextField)
+		view.addSubview(self.nextPeriodDateStart)
 	}
 
 	private func setupNavigationBar() {

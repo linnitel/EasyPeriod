@@ -50,4 +50,8 @@ class AppCoordinator: Coordinator {
 		calendarVC.coordinator = self
 		self.router?.pushViewController(calendarVC, animated: true)
 	}
+
+	func closeSettings() {
+		self.router?.popViewController(animated: true)
+	}
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A4A06F829F937AE0050BAB4 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A06F629F937AE0050BAB4 /* DataModel.xcdatamodeld */; };
 		4A6B636229F6E32500997332 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B636129F6E32500997332 /* AppDelegate.swift */; };
 		4A6B636429F6E32500997332 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B636329F6E32500997332 /* SceneDelegate.swift */; };
 		4A6B636629F6E32500997332 /* UserSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B636529F6E32500997332 /* UserSettingsVC.swift */; };
@@ -17,9 +18,11 @@
 		4A6B637A29F7F0FF00997332 /* UserSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B637929F7F0FF00997332 /* UserSettingsService.swift */; };
 		4A6B637C29F7F40C00997332 /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B637B29F7F40C00997332 /* CalendarVC.swift */; };
 		4A6B638529F80A6900997332 /* DropDownTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B638429F80A6900997332 /* DropDownTextFieldView.swift */; };
+		4A6B638A29F83CF600997332 /* CalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B638929F83CF600997332 /* CalendarModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A4A06F729F937AE0050BAB4 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		4A6B635E29F6E32500997332 /* EasyPeriod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyPeriod.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A6B636129F6E32500997332 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A6B636329F6E32500997332 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -32,6 +35,7 @@
 		4A6B637929F7F0FF00997332 /* UserSettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsService.swift; sourceTree = "<group>"; };
 		4A6B637B29F7F40C00997332 /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVC.swift; sourceTree = "<group>"; };
 		4A6B638429F80A6900997332 /* DropDownTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownTextFieldView.swift; sourceTree = "<group>"; };
+		4A6B638929F83CF600997332 /* CalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +75,7 @@
 				4A6B637E29F7F46700997332 /* Resaurses */,
 				4A6B637D29F7F45900997332 /* Main */,
 				4A6B636F29F6E32600997332 /* Info.plist */,
+				4A4A06F629F937AE0050BAB4 /* DataModel.xcdatamodeld */,
 			);
 			path = EasyPeriod;
 			sourceTree = "<group>";
@@ -105,8 +110,8 @@
 		4A6B638129F7F48D00997332 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				4A6B636529F6E32500997332 /* UserSettingsVC.swift */,
-				4A6B637B29F7F40C00997332 /* CalendarVC.swift */,
+				4A6B638829F83CE000997332 /* Settings */,
+				4A6B638629F83CCA00997332 /* Calendar */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -125,6 +130,23 @@
 				4A6B638429F80A6900997332 /* DropDownTextFieldView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		4A6B638629F83CCA00997332 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				4A6B637B29F7F40C00997332 /* CalendarVC.swift */,
+				4A6B638929F83CF600997332 /* CalendarModel.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		4A6B638829F83CE000997332 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				4A6B636529F6E32500997332 /* UserSettingsVC.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,10 +221,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A6B637629F6E61700997332 /* Coordinator.swift in Sources */,
+				4A6B638A29F83CF600997332 /* CalendarModel.swift in Sources */,
 				4A6B636629F6E32500997332 /* UserSettingsVC.swift in Sources */,
 				4A6B637C29F7F40C00997332 /* CalendarVC.swift in Sources */,
 				4A6B636229F6E32500997332 /* AppDelegate.swift in Sources */,
 				4A6B636429F6E32500997332 /* SceneDelegate.swift in Sources */,
+				4A4A06F829F937AE0050BAB4 /* DataModel.xcdatamodeld in Sources */,
 				4A6B638529F80A6900997332 /* DropDownTextFieldView.swift in Sources */,
 				4A6B637A29F7F0FF00997332 /* UserSettingsService.swift in Sources */,
 			);
@@ -414,6 +438,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4A4A06F629F937AE0050BAB4 /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4A4A06F729F937AE0050BAB4 /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 4A4A06F729F937AE0050BAB4 /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4A6B635629F6E32500997332 /* Project object */;
 }
