@@ -7,12 +7,15 @@
 
 import UIKit
 import Foundation
+import CoreData
 
 class UserSettingsVC: UIViewController {
 
 	weak public var coordinator: AppCoordinator?
 	public var isFirstLaunch: Bool?
-	private var model: SettingsModel?
+
+	private var datePersistance: [DateSettings] = []
+	private var settingsModel: SettingsModel?
 
 	private lazy var periodLengthTextField: UITextField = {
 		let field = UITextField(frame: CGRect(x: self.view.bounds.minX + 16, y: self.view.bounds.midY - 100, width: self.view.bounds.width - 32, height: 50))
@@ -60,6 +63,7 @@ class UserSettingsVC: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		self.fetchData()
 		self.setupViews()
 		self.setupNavigationBar()
 	}
@@ -83,7 +87,7 @@ class UserSettingsVC: UIViewController {
 				image: navigationLeftItem,
 				style: .plain,
 				target: self,
-				action: #selector(goBackWithoutSaving)
+				action: #selector(goBack)
 			)
 			navigationItem.leftBarButtonItem?.tintColor = UIColor(
 				cgColor:  CGColor(red: 256, green: 0, blue: 25, alpha: 100)
@@ -91,12 +95,12 @@ class UserSettingsVC: UIViewController {
 		}
 	}
 
-	@objc func goBackWithoutSaving() {
+	@objc private func goBack() {
 		// TODO add alert that date will not be saved
 		self.coordinator?.closeSettings()
 	}
 
-	@objc func goBackSaving() {
+	@objc private func goBackSaving() {
 		guard let periodLength = Int(periodLengthTextField.text!),
 			  let cycleLength = Int(cycleLengthTextField.text!) else {
 			// TODO create alert that asks all date to be filled in
@@ -106,8 +110,51 @@ class UserSettingsVC: UIViewController {
 			lastPeriodBeginDate: datePicker.date,
 			periodLength: periodLength,
 			cycleLength: cycleLength)
-		print(settingsModel)
-		self.goBackWithoutSaving()
+		self.save(settingsModel: settingsModel) {
+			print(settingsModel)
+			self.coordinator?.closeSettings()
+		}
 	}
+
+	// CoreData Interactions
+
+	private func fetchData() {
+		PersistanceService.shared.fetchData { result in
+			switch result {
+				case .success(let date):
+					DispatchQueue.main.async {
+						self.datePersistance = date
+						if !date.isEmpty,
+						   let lastPeriodDate = date[0].lastPeriodDate {
+							self.settingsModel = SettingsModel(
+								lastPeriodBeginDate: lastPeriodDate,
+								periodLength: Int(date[0].periodLength),
+								cycleLength: Int(date[0].cycleLength)
+							)
+							self.cycleLengthTextField.text = String(self.settingsModel!.cycleLength)
+							self.periodLengthTextField.text = String(self.settingsModel!.periodLength)
+							self.datePicker.date = self.settingsModel!.lastPeriodBeginDate
+						}
+					}
+				case .failure(let error):
+					print(error.localizedDescription)
+			}
+		}
+	}
+
+	private func save(settingsModel: SettingsModel, completion: ()-> Void) {
+		defer {
+			completion()
+		}
+		if self.datePersistance.isEmpty {
+			PersistanceService.shared.create(settingsModel) { settingsModel in
+				return
+			}
+		} else {
+			PersistanceService.shared.update(self.datePersistance[0], with: settingsModel)
+		}
+	}
+
+
 }
 
