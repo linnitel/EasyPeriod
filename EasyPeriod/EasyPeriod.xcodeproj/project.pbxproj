@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4A4A06F829F937AE0050BAB4 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A06F629F937AE0050BAB4 /* DataModel.xcdatamodeld */; };
+		4A4A06FA29F96EC30050BAB4 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A06F929F96EC30050BAB4 /* SettingsModel.swift */; };
+		4A4A06FC29F980400050BAB4 /* PersistanceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A06FB29F980400050BAB4 /* PersistanceService.swift */; };
 		4A6B636229F6E32500997332 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B636129F6E32500997332 /* AppDelegate.swift */; };
 		4A6B636429F6E32500997332 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B636329F6E32500997332 /* SceneDelegate.swift */; };
 		4A6B636629F6E32500997332 /* UserSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B636529F6E32500997332 /* UserSettingsVC.swift */; };
@@ -23,6 +25,8 @@
 
 /* Begin PBXFileReference section */
 		4A4A06F729F937AE0050BAB4 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		4A4A06F929F96EC30050BAB4 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		4A4A06FB29F980400050BAB4 /* PersistanceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceService.swift; sourceTree = "<group>"; };
 		4A6B635E29F6E32500997332 /* EasyPeriod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyPeriod.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A6B636129F6E32500997332 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A6B636329F6E32500997332 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				4A6B637929F7F0FF00997332 /* UserSettingsService.swift */,
+				4A4A06FB29F980400050BAB4 /* PersistanceService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -145,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				4A6B636529F6E32500997332 /* UserSettingsVC.swift */,
+				4A4A06F929F96EC30050BAB4 /* SettingsModel.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -225,7 +231,9 @@
 				4A6B636629F6E32500997332 /* UserSettingsVC.swift in Sources */,
 				4A6B637C29F7F40C00997332 /* CalendarVC.swift in Sources */,
 				4A6B636229F6E32500997332 /* AppDelegate.swift in Sources */,
+				4A4A06FC29F980400050BAB4 /* PersistanceService.swift in Sources */,
 				4A6B636429F6E32500997332 /* SceneDelegate.swift in Sources */,
+				4A4A06FA29F96EC30050BAB4 /* SettingsModel.swift in Sources */,
 				4A4A06F829F937AE0050BAB4 /* DataModel.xcdatamodeld in Sources */,
 				4A6B638529F80A6900997332 /* DropDownTextFieldView.swift in Sources */,
 				4A6B637A29F7F0FF00997332 /* UserSettingsService.swift in Sources */,
@@ -375,6 +383,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -403,6 +412,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

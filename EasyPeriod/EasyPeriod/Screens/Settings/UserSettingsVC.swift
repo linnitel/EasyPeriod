@@ -12,6 +12,7 @@ class UserSettingsVC: UIViewController {
 
 	weak public var coordinator: AppCoordinator?
 	public var isFirstLaunch: Bool?
+	private var model: SettingsModel?
 
 	private lazy var periodLengthTextField: UITextField = {
 		let field = UITextField(frame: CGRect(x: self.view.bounds.minX + 16, y: self.view.bounds.midY - 100, width: self.view.bounds.width - 32, height: 50))
@@ -25,7 +26,7 @@ class UserSettingsVC: UIViewController {
 
 	private lazy var cycleLengthTextField: UITextField = {
 		let field = UITextField(frame: CGRect(x: self.view.bounds.minX + 16, y: self.periodLengthTextField.frame.maxY + 12, width: self.view.bounds.width - 32, height: 50))
-		field.placeholder = "Last period Date: "
+		field.placeholder = "Cycle length: "
 		field.backgroundColor = .white
 		field.layer.borderColor = CGColor(red: 256, green: 0, blue: 25, alpha: 100)
 		field.layer.borderWidth = 1
@@ -52,6 +53,7 @@ class UserSettingsVC: UIViewController {
 		let button = UIButton(frame: CGRect(x: self.view.bounds.midX - 70, y: self.datePicker.frame.maxY + 12, width: 140, height: 50))
 		button.backgroundColor = UIColor(cgColor: CGColor(red: 256, green: 0, blue: 25, alpha: 100))
 		button.setTitle("Calculate", for: .normal)
+		button.addTarget(self, action: #selector(self.goBackSaving), for: .touchUpInside)
 		button.layer.cornerRadius = 8
 		return button
 	}()
@@ -81,7 +83,7 @@ class UserSettingsVC: UIViewController {
 				image: navigationLeftItem,
 				style: .plain,
 				target: self,
-				action: #selector(action)
+				action: #selector(goBackWithoutSaving)
 			)
 			navigationItem.leftBarButtonItem?.tintColor = UIColor(
 				cgColor:  CGColor(red: 256, green: 0, blue: 25, alpha: 100)
@@ -89,8 +91,23 @@ class UserSettingsVC: UIViewController {
 		}
 	}
 
-	@objc func action() {
+	@objc func goBackWithoutSaving() {
+		// TODO add alert that date will not be saved
 		self.coordinator?.closeSettings()
+	}
+
+	@objc func goBackSaving() {
+		guard let periodLength = Int(periodLengthTextField.text!),
+			  let cycleLength = Int(cycleLengthTextField.text!) else {
+			// TODO create alert that asks all date to be filled in
+				return
+			  }
+		let settingsModel = SettingsModel(
+			lastPeriodBeginDate: datePicker.date,
+			periodLength: periodLength,
+			cycleLength: cycleLength)
+		print(settingsModel)
+		self.goBackWithoutSaving()
 	}
 }
 
