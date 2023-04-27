@@ -116,7 +116,7 @@ class UserSettingsVC: UIViewController {
 		}
 	}
 
-	// CoreData Interactions
+	// MARK: CoreData Interactions
 
 	private func fetchData() {
 		PersistanceService.shared.fetchData { result in
@@ -146,6 +146,7 @@ class UserSettingsVC: UIViewController {
 		defer {
 			completion()
 		}
+
 		if self.datePersistance.isEmpty {
 			PersistanceService.shared.create(settingsModel) { settingsModel in
 				return

@@ -13,6 +13,10 @@ class PersistanceService {
 
 	private let viewContext: NSManagedObjectContext
 
+	private init() {
+		viewContext = persistentContainer.viewContext
+	}
+
 	// MARK: - Core Data stack
 	private let persistentContainer: NSPersistentContainer = {
 		let container = NSPersistentContainer(name: "DataModel")
@@ -24,13 +28,8 @@ class PersistanceService {
 		})
 		return container
 	}()
-	
-	private init() {
-		viewContext = persistentContainer.viewContext
-	}
 
 	// MARK: - Core Data Saving support
-
 	func saveContext () {
 		if viewContext.hasChanges {
 			do {

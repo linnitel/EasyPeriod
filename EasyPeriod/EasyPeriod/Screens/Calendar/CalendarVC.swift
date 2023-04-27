@@ -11,6 +11,8 @@ import UIKit
 class CalendarVC: UIViewController {
 	
 	weak public var coordinator: AppCoordinator?
+
+	private var datePersistance: [DateSettings] = []
 	private var calendarModel: CalendarModel?
 
 	private lazy var nextPeriodDate: UILabel = {
@@ -49,27 +51,31 @@ class CalendarVC: UIViewController {
 		return button
 	}()
 
-	private lazy var buttonTwo: UIButton = {
-		let button = UIButton(frame: CGRect(x: self.view.bounds.midX - 70, y: self.buttonOne.frame.maxY + 12, width: 140, height: 50))
-		button.backgroundColor = UIColor(cgColor: CGColor(red: 256, green: 0, blue: 25, alpha: 100))
-		button.setTitle("No", for: .normal)
-		button.layer.cornerRadius = 8
-		return button
-	}()
-
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		self.getData()
+		self.fetchData()
 		self.setupViews()
 		self.setupNavigationBar()
 	}
 
-	private func getData() {
-		self.calendarModel = CalendarModel(nextPeriodDate: Date(), partOfCycle: .period)
-		self.nextPeriodDate.text = "28"
-		self.nextPeriodMonth.text = "april"
-		self.nextPeriodWeekday.text = "wed"
-		self.descriptionText.text = "Periods started?"
+	private func calculateData(for date: Date, cycle: Int, period: Int) {
+		let nextPeriodDate = DateCalculatiorService.shared.calculateDate(date, cycle: cycle)
+		let state = DateCalculatiorService.shared.calculateState(nextPeriodDate, cycle: cycle, period: period)
+		self.calendarModel = CalendarModel(nextPeriodDate: nextPeriodDate, partOfCycle: state)
+		self.nextPeriodDate.text = DateCalculatiorService.shared.getDay(nextPeriodDate)
+		self.nextPeriodMonth.text = DateCalculatiorService.shared.getMonth(nextPeriodDate)
+		self.nextPeriodWeekday.text = DateCalculatiorService.shared.getWeekday(nextPeriodDate)
+		switch state {
+			case .offPeriod:
+				self.descriptionText.text = "Next period"
+				self.buttonOne.setTitle("Period started", for: .normal)
+			case .period:
+				self.descriptionText.text = "Period is in progress"
+				self.buttonOne.setTitle("Period ended", for: .normal)
+			case .delay:
+				self.descriptionText.text = "Delay"
+				self.buttonOne.setTitle("Have started!!", for: .normal)
+		}
 	}
 
 	private func setupViews() {
@@ -80,7 +86,6 @@ class CalendarVC: UIViewController {
 		view.addSubview(self.nextPeriodWeekday)
 		view.addSubview(self.descriptionText)
 		view.addSubview(self.buttonOne)
-		view.addSubview(self.buttonTwo)
 	}
 
 	private func setupNavigationBar() {
@@ -99,5 +104,28 @@ class CalendarVC: UIViewController {
 
 	@objc func action() {
 		self.coordinator?.openSettings()
+	}
+
+	// MARK: CoreData Interactions
+
+	private func fetchData() {
+		PersistanceService.shared.fetchData { result in
+			switch result {
+				case .success(let date):
+					DispatchQueue.main.async {
+						self.datePersistance = date
+						if !date.isEmpty,
+						   let lastPeriodDate = date[0].lastPeriodDate {
+							self.calculateData(
+								for: lastPeriodDate,
+								cycle: Int(date[0].cycleLength),
+								period: Int(date[0].periodLength)
+							)
+						}
+					}
+				case .failure(let error):
+					print(error.localizedDescription)
+			}
+		}
 	}
 }

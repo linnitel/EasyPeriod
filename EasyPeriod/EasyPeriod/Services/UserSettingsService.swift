@@ -8,7 +8,7 @@
 import Foundation
 
 struct UserProfileService {
-	static let singleton = UserProfileService()
+	static let shared = UserProfileService()
 
 	let defaults = UserDefaults.standard
 

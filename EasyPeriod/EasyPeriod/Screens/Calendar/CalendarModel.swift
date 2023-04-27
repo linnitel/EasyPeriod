@@ -12,8 +12,8 @@ struct CalendarModel {
 	let partOfCycle: PartOfCycle
 
 	enum PartOfCycle {
+		case offPeriod
 		case period
-		case menstruation
 		case delay
 	}
 }

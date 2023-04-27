@@ -25,7 +25,7 @@ class Coordinator {
 class AppCoordinator: Coordinator {
 
 	override func start() {
-		let isFirstLaunch = UserProfileService.singleton.isFirstLaunch()
+		let isFirstLaunch = UserProfileService.shared.isFirstLaunch()
 		if isFirstLaunch {
 			let userSettingsVC = UserSettingsVC()
 			userSettingsVC.coordinator = self
