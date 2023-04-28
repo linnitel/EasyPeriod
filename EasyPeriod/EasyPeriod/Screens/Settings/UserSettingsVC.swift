@@ -17,28 +17,64 @@ class UserSettingsVC: UIViewController {
 	private var datePersistance: [DateSettings] = []
 	private var settingsModel: SettingsModel?
 
+	private lazy var periodLengthLabel: UILabel = {
+		let label = UILabel(frame: CGRect(
+			x: self.view.bounds.minX + 16,
+			y: self.view.bounds.midY - 100,
+			width: (self.view.bounds.width - 36) / 2,
+			height: 50)
+		)
+		label.text = "Period Length: "
+		return label
+	}()
+
 	private lazy var periodLengthTextField: UITextField = {
-		let field = UITextField(frame: CGRect(x: self.view.bounds.minX + 16, y: self.view.bounds.midY - 100, width: self.view.bounds.width - 32, height: 50))
-		field.placeholder = "Period Length: "
+		let field = UITextField(frame: CGRect(
+			x: self.periodLengthLabel.frame.maxX + 8,
+			y: self.view.bounds.midY - 100,
+			width: (self.view.bounds.width - 36) / 2,
+			height: 50)
+		)
 		field.backgroundColor = .white
-		field.layer.borderColor = CGColor(red: 256, green: 0, blue: 25, alpha: 100)
+		field.layer.borderColor = UIColor(named: "mainColor")?.cgColor
 		field.layer.borderWidth = 1
 		field.layer.cornerRadius = 8
 		return field
 	}()
 
+	private lazy var cycleLengthLabel: UILabel = {
+		let label = UILabel(frame: CGRect(
+			x: self.view.bounds.minX + 16,
+			y: self.periodLengthTextField.frame.maxY + 12,
+			width: (self.view.bounds.width - 36) / 2,
+			height: 50)
+		)
+		label.text = "Cycle length: "
+		label.backgroundColor = .white
+		label.layer.cornerRadius = 8
+		return label
+	}()
+
 	private lazy var cycleLengthTextField: UITextField = {
-		let field = UITextField(frame: CGRect(x: self.view.bounds.minX + 16, y: self.periodLengthTextField.frame.maxY + 12, width: self.view.bounds.width - 32, height: 50))
-		field.placeholder = "Cycle length: "
+		let field = UITextField(frame: CGRect(
+			x: self.cycleLengthLabel.frame.maxX + 8,
+			y: self.periodLengthTextField.frame.maxY + 12,
+			width: (self.view.bounds.width - 36) / 2,
+			height: 50)
+		)
 		field.backgroundColor = .white
-		field.layer.borderColor = CGColor(red: 256, green: 0, blue: 25, alpha: 100)
+		field.layer.borderColor = UIColor(named: "mainColor")?.cgColor
 		field.layer.borderWidth = 1
 		field.layer.cornerRadius = 8
 		return field
 	}()
 
 	private lazy var lastPeriodLable: UILabel = {
-		let label = UILabel(frame: CGRect(x: self.view.bounds.minX + 16, y: self.cycleLengthTextField.frame.maxY + 12, width: self.view.bounds.width - 32, height: 50))
+		let label = UILabel(frame: CGRect(
+			x: self.view.bounds.minX + 16,
+			y: self.cycleLengthTextField.frame.maxY + 12,
+			width: self.view.bounds.width - 32,
+			height: 50))
 		label.text = "Last period Date: "
 		return label
 	}()
@@ -53,11 +89,17 @@ class UserSettingsVC: UIViewController {
 	}()
 
 	private lazy var buttonCalculate: UIButton = {
-		let button = UIButton(frame: CGRect(x: self.view.bounds.midX - 70, y: self.datePicker.frame.maxY + 12, width: 140, height: 50))
-		button.backgroundColor = UIColor(cgColor: CGColor(red: 256, green: 0, blue: 25, alpha: 100))
+		let button = UIButton(frame: CGRect(
+			x: self.view.bounds.midX - 120,
+			y: self.datePicker.frame.maxY + 12,
+			width: 240,
+			height: 56)
+		)
+		button.backgroundColor = .white
 		button.setTitle("Calculate", for: .normal)
 		button.addTarget(self, action: #selector(self.goBackSaving), for: .touchUpInside)
-		button.layer.cornerRadius = 8
+		button.layer.cornerRadius = 28
+		button.setTitleColor(UIColor(named: "mainColor"), for: .normal)
 		return button
 	}()
 
@@ -69,9 +111,11 @@ class UserSettingsVC: UIViewController {
 	}
 
 	private func setupViews() {
-		view.backgroundColor = .white
+		self.view.backgroundColor = UIColor(named: "backgroundColor")
 		view.frame = UIScreen.main.bounds
+		view.addSubview(self.periodLengthLabel)
 		view.addSubview(self.periodLengthTextField)
+		view.addSubview(self.cycleLengthLabel)
 		view.addSubview(self.cycleLengthTextField)
 		view.addSubview(self.datePicker)
 		view.addSubview(self.buttonCalculate)
@@ -79,6 +123,8 @@ class UserSettingsVC: UIViewController {
 	}
 
 	private func setupNavigationBar() {
+		self.title = "Settings"
+		self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "mainColor") ?? .black]
 		if let isFirstLaunch = self.isFirstLaunch,
 		   !isFirstLaunch {
 			let navigationLeftItem = UIImage(systemName: "arrow.left")
@@ -90,7 +136,7 @@ class UserSettingsVC: UIViewController {
 				action: #selector(goBack)
 			)
 			navigationItem.leftBarButtonItem?.tintColor = UIColor(
-				cgColor:  CGColor(red: 256, green: 0, blue: 25, alpha: 100)
+				cgColor:  UIColor(named: "mainColor")?.cgColor ?? CGColor(red: 0, green: 0, blue: 0, alpha: 100)
 			)
 		}
 	}
