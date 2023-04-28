@@ -11,6 +11,7 @@
 		4A4A06FA29F96EC30050BAB4 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A06F929F96EC30050BAB4 /* SettingsModel.swift */; };
 		4A4A06FC29F980400050BAB4 /* PersistanceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A06FB29F980400050BAB4 /* PersistanceService.swift */; };
 		4A4F523D29FAD9C6003638C5 /* DateCalculatiorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4F523C29FAD9C6003638C5 /* DateCalculatiorService.swift */; };
+		4A4F524029FBC878003638C5 /* DateFormatter+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4F523F29FBC878003638C5 /* DateFormatter+Extention.swift */; };
 		4A6B636229F6E32500997332 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B636129F6E32500997332 /* AppDelegate.swift */; };
 		4A6B636429F6E32500997332 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B636329F6E32500997332 /* SceneDelegate.swift */; };
 		4A6B636629F6E32500997332 /* UserSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B636529F6E32500997332 /* UserSettingsVC.swift */; };
@@ -29,6 +30,7 @@
 		4A4A06F929F96EC30050BAB4 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		4A4A06FB29F980400050BAB4 /* PersistanceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceService.swift; sourceTree = "<group>"; };
 		4A4F523C29FAD9C6003638C5 /* DateCalculatiorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCalculatiorService.swift; sourceTree = "<group>"; };
+		4A4F523F29FBC878003638C5 /* DateFormatter+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extention.swift"; sourceTree = "<group>"; };
 		4A6B635E29F6E32500997332 /* EasyPeriod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyPeriod.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A6B636129F6E32500997332 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A6B636329F6E32500997332 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +57,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A4F523E29FBC862003638C5 /* Extentions */ = {
+			isa = PBXGroup;
+			children = (
+				4A4F523F29FBC878003638C5 /* DateFormatter+Extention.swift */,
+			);
+			path = Extentions;
+			sourceTree = "<group>";
+		};
 		4A6B635529F6E32500997332 = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +84,7 @@
 		4A6B636029F6E32500997332 /* EasyPeriod */ = {
 			isa = PBXGroup;
 			children = (
+				4A4F523E29FBC862003638C5 /* Extentions */,
 				4A4A06F629F937AE0050BAB4 /* DataModel.xcdatamodeld */,
 				4A6B638329F80A4400997332 /* Views */,
 				4A6B638229F7F4A000997332 /* Services */,
@@ -235,6 +246,7 @@
 				4A6B637C29F7F40C00997332 /* CalendarVC.swift in Sources */,
 				4A4F523D29FAD9C6003638C5 /* DateCalculatiorService.swift in Sources */,
 				4A6B636229F6E32500997332 /* AppDelegate.swift in Sources */,
+				4A4F524029FBC878003638C5 /* DateFormatter+Extention.swift in Sources */,
 				4A4A06FC29F980400050BAB4 /* PersistanceService.swift in Sources */,
 				4A6B636429F6E32500997332 /* SceneDelegate.swift in Sources */,
 				4A4A06FA29F96EC30050BAB4 /* SettingsModel.swift in Sources */,

@@ -96,14 +96,14 @@ class UserSettingsVC: UIViewController {
 	}
 
 	@objc private func goBack() {
-		// TODO add alert that date will not be saved
+		// TODO: add alert that date will not be saved
 		self.coordinator?.closeSettings()
 	}
 
 	@objc private func goBackSaving() {
+		// TODO: change for selectors
 		guard let periodLength = Int(periodLengthTextField.text!),
 			  let cycleLength = Int(cycleLengthTextField.text!) else {
-			// TODO create alert that asks all date to be filled in
 				return
 			  }
 		let settingsModel = SettingsModel(

@@ -24,4 +24,12 @@ struct UserProfileService {
 		return false
 	}
 
+	func getDelay() -> Bool {
+		defaults.bool(forKey: "delay")
+	}
+
+	func setDelay(_ delay: Bool) {
+		defaults.set(delay, forKey: "delay")
+	}
+
 }

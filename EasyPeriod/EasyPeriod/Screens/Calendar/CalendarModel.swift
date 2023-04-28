@@ -8,12 +8,13 @@
 import Foundation
 
 struct CalendarModel {
-	let nextPeriodDate: Date
-	let partOfCycle: PartOfCycle
+	var nextPeriodDate: Date
+	var partOfCycle: PartOfCycle
 
 	enum PartOfCycle {
 		case offPeriod
 		case period
 		case delay
+		case startDay
 	}
 }

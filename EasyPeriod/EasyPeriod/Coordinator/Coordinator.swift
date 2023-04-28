@@ -30,6 +30,7 @@ class AppCoordinator: Coordinator {
 			let userSettingsVC = UserSettingsVC()
 			userSettingsVC.coordinator = self
 			userSettingsVC.isFirstLaunch = true
+			UserProfileService.shared.setDelay(false)
 			self.router?.setViewControllers([userSettingsVC], animated: false)
 		} else {
 			let calendarVC = CalendarVC()
