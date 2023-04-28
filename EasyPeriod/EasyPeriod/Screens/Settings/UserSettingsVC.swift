@@ -17,72 +17,110 @@ class UserSettingsVC: UIViewController {
 	private var datePersistance: [DateSettings] = []
 	private var settingsModel: SettingsModel?
 
-	private lazy var periodLengthLabel: UILabel = {
-		let label = UILabel(frame: CGRect(
+//	private lazy var periodLengthLabelTitle: UILabel = {
+//		let label = UILabel(frame: CGRect(
+//			x: self.view.bounds.minX + 16,
+//			y: self.view.bounds.midY - 200,
+//			width: (self.view.bounds.width - 36) / 2,
+//			height: 50)
+//		)
+//		label.text = "Period Length: "
+//		return label
+//	}()
+//
+//	private lazy var periodLengthLabel: UILabel = {
+//		let label = UILabel(frame: CGRect(
+//			x: self.periodLengthLabelTitle.frame.maxX + 8,
+//			y: self.view.bounds.midY - 200,
+//			width: (self.view.bounds.width - 36) / 2,
+//			height: 50)
+//		)
+//		label.textAlignment = .right
+//		label.textColor = UIColor(named: "mainColor")
+//		return label
+//	}()
+	private lazy var periodLengthView: DropDownView = {
+		let view = DropDownView(frame: CGRect(
 			x: self.view.bounds.minX + 16,
-			y: self.view.bounds.midY - 100,
-			width: (self.view.bounds.width - 36) / 2,
+			y: self.view.bounds.midY - 200,
+			width: self.view.bounds.width - 32,
 			height: 50)
 		)
-		label.text = "Period Length: "
-		return label
+		view.labelTitle.text = "Period Length: "
+		view.order = .isFirst
+		return view
 	}()
 
-	private lazy var periodLengthTextField: UITextField = {
-		let field = UITextField(frame: CGRect(
-			x: self.periodLengthLabel.frame.maxX + 8,
-			y: self.view.bounds.midY - 100,
-			width: (self.view.bounds.width - 36) / 2,
-			height: 50)
-		)
-		field.backgroundColor = .white
-		field.layer.borderColor = UIColor(named: "mainColor")?.cgColor
-		field.layer.borderWidth = 1
-		field.layer.cornerRadius = 8
-		return field
-	}()
+//	private lazy var periodLengthTextField: UITextField = {
+//		let field = UITextField(frame: CGRect(
+//			x: self.periodLengthLabelTitle.frame.maxX + 8,
+//			y: self.view.bounds.midY - 200,
+//			width: (self.view.bounds.width - 36) / 2,
+//			height: 50)
+//		)
+//		field.backgroundColor = .white
+//		field.layer.borderColor = UIColor(named: "mainColor")?.cgColor
+//		field.layer.borderWidth = 1
+//		field.layer.cornerRadius = 8
+//		return field
+//	}()
 
-	private lazy var cycleLengthLabel: UILabel = {
-		let label = UILabel(frame: CGRect(
+//	private lazy var cycleLengthLabel: UILabel = {
+//		let label = UILabel(frame: CGRect(
+//			x: self.view.bounds.minX + 16,
+//			y: self.periodLengthView.frame.maxY + 12,
+//			width: (self.view.bounds.width - 36) / 2,
+//			height: 50)
+//		)
+//		label.text = "Cycle length: "
+//		label.backgroundColor = .white
+//		label.layer.cornerRadius = 8
+//		return label
+//	}()
+//
+//	private lazy var cycleLengthTextField: UITextField = {
+//		let field = UITextField(frame: CGRect(
+//			x: self.cycleLengthLabel.frame.maxX + 8,
+//			y: self.periodLengthView.frame.maxY + 12,
+//			width: (self.view.bounds.width - 36) / 2,
+//			height: 50)
+//		)
+//		field.backgroundColor = .white
+//		field.layer.borderColor = UIColor(named: "mainColor")?.cgColor
+//		field.layer.borderWidth = 1
+//		field.layer.cornerRadius = 8
+//		return field
+//	}()
+
+	private lazy var cycleLengthView: DropDownView = {
+		let view = DropDownView(frame: CGRect(
 			x: self.view.bounds.minX + 16,
-			y: self.periodLengthTextField.frame.maxY + 12,
-			width: (self.view.bounds.width - 36) / 2,
+			y: self.periodLengthView.frame.maxY,
+			width: self.view.bounds.width - 32,
 			height: 50)
 		)
-		label.text = "Cycle length: "
-		label.backgroundColor = .white
-		label.layer.cornerRadius = 8
-		return label
-	}()
-
-	private lazy var cycleLengthTextField: UITextField = {
-		let field = UITextField(frame: CGRect(
-			x: self.cycleLengthLabel.frame.maxX + 8,
-			y: self.periodLengthTextField.frame.maxY + 12,
-			width: (self.view.bounds.width - 36) / 2,
-			height: 50)
-		)
-		field.backgroundColor = .white
-		field.layer.borderColor = UIColor(named: "mainColor")?.cgColor
-		field.layer.borderWidth = 1
-		field.layer.cornerRadius = 8
-		return field
+		view.labelTitle.text = "Cycle length: "
+		view.order = .middle
+		return view
 	}()
 
 	private lazy var lastPeriodLable: UILabel = {
 		let label = UILabel(frame: CGRect(
 			x: self.view.bounds.minX + 16,
-			y: self.cycleLengthTextField.frame.maxY + 12,
+			y: self.cycleLengthView.frame.maxY,
 			width: self.view.bounds.width - 32,
 			height: 50))
+		label.font = label.font.withSize(17)
 		label.text = "Last period Date: "
 		return label
 	}()
 
 	private lazy var datePicker: UIDatePicker = {
-		let picker = UIDatePicker(frame: CGRect(x: self.view.bounds.minX + 16, y: self.lastPeriodLable.frame.minY + 8, width: self.view.bounds.width - 32, height: 50))
+		let picker = UIDatePicker(frame: CGRect(x: self.view.bounds.minX + 16, y: self.lastPeriodLable.frame.maxY + 12, width: self.view.bounds.width - 32, height: 150))
 		picker.datePickerMode = .date
 		picker.maximumDate = .now
+		picker.minimumDate = .distantPast
+		picker.preferredDatePickerStyle = .wheels
 		picker.subviews[0].subviews[0].subviews[0].alpha = 0
 		picker.calendar = Calendar(identifier: .gregorian)
 		return picker
@@ -113,10 +151,12 @@ class UserSettingsVC: UIViewController {
 	private func setupViews() {
 		self.view.backgroundColor = UIColor(named: "backgroundColor")
 		view.frame = UIScreen.main.bounds
-		view.addSubview(self.periodLengthLabel)
-		view.addSubview(self.periodLengthTextField)
-		view.addSubview(self.cycleLengthLabel)
-		view.addSubview(self.cycleLengthTextField)
+//		view.addSubview(self.periodLengthLabelTitle)
+//		view.addSubview(self.periodLengthLabel)
+		view.addSubview(self.periodLengthView)
+//		view.addSubview(self.cycleLengthLabel)
+//		view.addSubview(self.cycleLengthTextField)
+		view.addSubview(self.cycleLengthView)
 		view.addSubview(self.datePicker)
 		view.addSubview(self.buttonCalculate)
 		view.addSubview(self.lastPeriodLable)
@@ -148,8 +188,8 @@ class UserSettingsVC: UIViewController {
 
 	@objc private func goBackSaving() {
 		// TODO: change for selectors
-		guard let periodLength = Int(periodLengthTextField.text!),
-			  let cycleLength = Int(cycleLengthTextField.text!) else {
+		guard let periodLength = Int(self.periodLengthView.valueLabel.text!),
+			  let cycleLength = Int(self.cycleLengthView.valueLabel.text!) else {
 				return
 			  }
 		let settingsModel = SettingsModel(
@@ -177,8 +217,8 @@ class UserSettingsVC: UIViewController {
 								periodLength: Int(date[0].periodLength),
 								cycleLength: Int(date[0].cycleLength)
 							)
-							self.cycleLengthTextField.text = String(self.settingsModel!.cycleLength)
-							self.periodLengthTextField.text = String(self.settingsModel!.periodLength)
+							self.cycleLengthView.valueLabel.text = String(self.settingsModel!.cycleLength)
+							self.periodLengthView.valueLabel.text = String(self.settingsModel!.periodLength)
 							self.datePicker.date = self.settingsModel!.lastPeriodBeginDate
 						}
 					}

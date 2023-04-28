@@ -38,7 +38,7 @@ class DateCalculatiorService {
 		let now = Date()
 		let endPeriod = Calendar.current.date(byAdding: .day, value: period, to: nextDate)!
 		if Calendar.current.isDate(now, equalTo: nextDate, toGranularity: .day) {
-			return .period
+			return .startDay
 		} else if now < nextDate {
 			return .offPeriod
 		}

@@ -21,7 +21,7 @@
 		4A6B637829F7E30900997332 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A6B637729F7E30900997332 /* Main.storyboard */; };
 		4A6B637A29F7F0FF00997332 /* UserSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B637929F7F0FF00997332 /* UserSettingsService.swift */; };
 		4A6B637C29F7F40C00997332 /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B637B29F7F40C00997332 /* CalendarVC.swift */; };
-		4A6B638529F80A6900997332 /* DropDownTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B638429F80A6900997332 /* DropDownTextFieldView.swift */; };
+		4A6B638529F80A6900997332 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B638429F80A6900997332 /* DropDownView.swift */; };
 		4A6B638A29F83CF600997332 /* CalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B638929F83CF600997332 /* CalendarModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,7 +42,7 @@
 		4A6B637729F7E30900997332 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		4A6B637929F7F0FF00997332 /* UserSettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsService.swift; sourceTree = "<group>"; };
 		4A6B637B29F7F40C00997332 /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVC.swift; sourceTree = "<group>"; };
-		4A6B638429F80A6900997332 /* DropDownTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownTextFieldView.swift; sourceTree = "<group>"; };
+		4A6B638429F80A6900997332 /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		4A6B638929F83CF600997332 /* CalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -136,9 +136,9 @@
 		4A6B638229F7F4A000997332 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				4A4F523C29FAD9C6003638C5 /* DateCalculatiorService.swift */,
 				4A6B637929F7F0FF00997332 /* UserSettingsService.swift */,
 				4A4A06FB29F980400050BAB4 /* PersistanceService.swift */,
-				4A4F523C29FAD9C6003638C5 /* DateCalculatiorService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -146,7 +146,7 @@
 		4A6B638329F80A4400997332 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4A6B638429F80A6900997332 /* DropDownTextFieldView.swift */,
+				4A6B638429F80A6900997332 /* DropDownView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -251,7 +251,7 @@
 				4A6B636429F6E32500997332 /* SceneDelegate.swift in Sources */,
 				4A4A06FA29F96EC30050BAB4 /* SettingsModel.swift in Sources */,
 				4A4A06F829F937AE0050BAB4 /* DataModel.xcdatamodeld in Sources */,
-				4A6B638529F80A6900997332 /* DropDownTextFieldView.swift in Sources */,
+				4A6B638529F80A6900997332 /* DropDownView.swift in Sources */,
 				4A6B637A29F7F0FF00997332 /* UserSettingsService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
