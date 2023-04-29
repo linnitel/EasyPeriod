@@ -21,14 +21,23 @@ class DropDownView: UIView {
 		}
 	}
 
+	private var bottomConstraint: NSLayoutConstraint?
+	private var pickerTopConstraints: NSLayoutConstraint?
+	private var pickerBottomConstraints: NSLayoutConstraint?
+	private var pickerLeadingConstraints: NSLayoutConstraint?
+	private var pickerTrailingConstraints: NSLayoutConstraint?
+
+
 	lazy var labelTitle: UILabel = {
 		let label = UILabel()
+		label.translatesAutoresizingMaskIntoConstraints = false
 		label.font = label.font.withSize(17)
 		return label
 	}()
 
 	lazy var valueLabel: UILabel = {
 		let label = UILabel()
+		label.translatesAutoresizingMaskIntoConstraints = false
 		label.textAlignment = .right
 		label.textColor = UIColor(named: "mainColor")
 		label.font = label.font.withSize(17)
@@ -37,6 +46,7 @@ class DropDownView: UIView {
 
 	lazy var picker: UIPickerView = {
 		let picker = UIPickerView()
+		picker.translatesAutoresizingMaskIntoConstraints = false
 		picker.backgroundColor = .white
 		return picker
 	}()
@@ -49,17 +59,50 @@ class DropDownView: UIView {
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
 
-//		self.clipsToBounds = true
 		self.addSubview(labelTitle)
 		self.addSubview(valueLabel)
 		self.addSubview(picker)
+
+		self.bottomConstraint = self.valueLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -12)
+		self.pickerTopConstraints = self.picker.topAnchor.constraint(equalTo: self.labelTitle.bottomAnchor, constant: 12)
+		self.pickerBottomConstraints = self.picker.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+		self.pickerLeadingConstraints = self.picker.leadingAnchor.constraint(equalTo: self.leadingAnchor)
+		self.pickerTrailingConstraints = self.picker.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+
+		NSLayoutConstraint.activate([
+			self.labelTitle.topAnchor.constraint(equalTo: self.topAnchor, constant: 12),
+			self.labelTitle.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+
+			self.valueLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 12),
+			self.valueLabel.leadingAnchor.constraint(equalTo: self.labelTitle.trailingAnchor, constant: 8),
+			self.valueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+
+			self.bottomConstraint!,
+			])
 	}
 
 	// MARK: Overrides
 	override func layoutSubviews() {
 		super.layoutSubviews()
 
-		self.backgroundColor = self.isOpen ? UIColor(named:  "lightSelectorColor") : .white
+		if isOpen {
+			self.backgroundColor = UIColor(named:  "lightSelectorColor")
+			self.picker.isHidden = false
+			self.bottomConstraint?.isActive = false
+			self.pickerTopConstraints?.isActive = true
+			self.pickerBottomConstraints?.isActive = true
+			self.pickerLeadingConstraints?.isActive = true
+			self.pickerTrailingConstraints?.isActive = true
+		} else {
+			self.backgroundColor = .white
+			self.picker.isHidden = true
+			self.bottomConstraint?.isActive = true
+			self.pickerTopConstraints?.isActive = false
+			self.pickerBottomConstraints?.isActive = false
+			self.pickerLeadingConstraints?.isActive = false
+			self.pickerTrailingConstraints?.isActive = false
+		}
+
 		switch order {
 			case .isFirst:
 				self.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
@@ -70,27 +113,6 @@ class DropDownView: UIView {
 				self.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
 				self.layer.cornerRadius = 8
 		}
-		if isOpen {
-			print("view is open")
-		}
-
-		self.labelTitle.frame = CGRect(
-			x: self.bounds.minX + 16,
-			y: self.bounds.minY,
-			width: (self.bounds.width - 36) / 2,
-			height: 50)
-
-		self.valueLabel.frame = CGRect(
-			x: self.labelTitle.frame.maxX + 8,
-			y: self.bounds.minY,
-			width: (self.bounds.width - 36) / 2,
-			height: 50)
-
-		self.picker.frame = CGRect(
-			x: self.bounds.minX,
-			y: self.labelTitle.frame.maxX + 12,
-			width: self.bounds.width - 32,
-			height: 150)
 	}
 
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

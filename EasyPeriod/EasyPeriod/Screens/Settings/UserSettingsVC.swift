@@ -17,106 +17,51 @@ class UserSettingsVC: UIViewController {
 	private var datePersistance: [DateSettings] = []
 	private var settingsModel: SettingsModel?
 
-//	private lazy var periodLengthLabelTitle: UILabel = {
-//		let label = UILabel(frame: CGRect(
+	private lazy var periodLengthView: DropDownView = {
+//		let view = DropDownView(frame: CGRect(
 //			x: self.view.bounds.minX + 16,
 //			y: self.view.bounds.midY - 200,
-//			width: (self.view.bounds.width - 36) / 2,
+//			width: self.view.bounds.width - 32,
 //			height: 50)
 //		)
-//		label.text = "Period Length: "
-//		return label
-//	}()
-//
-//	private lazy var periodLengthLabel: UILabel = {
-//		let label = UILabel(frame: CGRect(
-//			x: self.periodLengthLabelTitle.frame.maxX + 8,
-//			y: self.view.bounds.midY - 200,
-//			width: (self.view.bounds.width - 36) / 2,
-//			height: 50)
-//		)
-//		label.textAlignment = .right
-//		label.textColor = UIColor(named: "mainColor")
-//		return label
-//	}()
-	private lazy var periodLengthView: DropDownView = {
-		let view = DropDownView(frame: CGRect(
-			x: self.view.bounds.minX + 16,
-			y: self.view.bounds.midY - 200,
-			width: self.view.bounds.width - 32,
-			height: 50)
-		)
-		view.labelTitle.text = "Period Length: "
+		let view = DropDownView()
+		view.translatesAutoresizingMaskIntoConstraints = false
+		view.labelTitle.text = "Period Length (In days): "
 		view.order = .isFirst
 		return view
 	}()
 
-//	private lazy var periodLengthTextField: UITextField = {
-//		let field = UITextField(frame: CGRect(
-//			x: self.periodLengthLabelTitle.frame.maxX + 8,
-//			y: self.view.bounds.midY - 200,
-//			width: (self.view.bounds.width - 36) / 2,
-//			height: 50)
-//		)
-//		field.backgroundColor = .white
-//		field.layer.borderColor = UIColor(named: "mainColor")?.cgColor
-//		field.layer.borderWidth = 1
-//		field.layer.cornerRadius = 8
-//		return field
-//	}()
-
-//	private lazy var cycleLengthLabel: UILabel = {
-//		let label = UILabel(frame: CGRect(
-//			x: self.view.bounds.minX + 16,
-//			y: self.periodLengthView.frame.maxY + 12,
-//			width: (self.view.bounds.width - 36) / 2,
-//			height: 50)
-//		)
-//		label.text = "Cycle length: "
-//		label.backgroundColor = .white
-//		label.layer.cornerRadius = 8
-//		return label
-//	}()
-//
-//	private lazy var cycleLengthTextField: UITextField = {
-//		let field = UITextField(frame: CGRect(
-//			x: self.cycleLengthLabel.frame.maxX + 8,
-//			y: self.periodLengthView.frame.maxY + 12,
-//			width: (self.view.bounds.width - 36) / 2,
-//			height: 50)
-//		)
-//		field.backgroundColor = .white
-//		field.layer.borderColor = UIColor(named: "mainColor")?.cgColor
-//		field.layer.borderWidth = 1
-//		field.layer.cornerRadius = 8
-//		return field
-//	}()
-
 	private lazy var cycleLengthView: DropDownView = {
-		let view = DropDownView(frame: CGRect(
-			x: self.view.bounds.minX + 16,
-			y: self.periodLengthView.frame.maxY,
-			width: self.view.bounds.width - 32,
-			height: 50)
-		)
-		view.labelTitle.text = "Cycle length: "
+//		let view = DropDownView(frame: CGRect(
+//			x: self.view.bounds.minX + 16,
+//			y: self.periodLengthView.frame.maxY,
+//			width: self.view.bounds.width - 32,
+//			height: 50)
+//		)
+		let view = DropDownView()
+		view.translatesAutoresizingMaskIntoConstraints = false
+		view.labelTitle.text = "Cycle length (In days): "
 		view.order = .middle
 		return view
 	}()
 
 	private lazy var lastPeriodLable: UILabel = {
-		let label = UILabel(frame: CGRect(
-			x: self.view.bounds.minX + 16,
-			y: self.cycleLengthView.frame.maxY,
-			width: self.view.bounds.width - 32,
-			height: 50))
+//		let label = UILabel(frame: CGRect(
+//			x: self.view.bounds.minX + 16,
+//			y: self.cycleLengthView.frame.maxY,
+//			width: self.view.bounds.width - 32,
+//			height: 50))
+		let label = UILabel()
+		view.translatesAutoresizingMaskIntoConstraints = false
 		label.font = label.font.withSize(17)
 		label.text = "Last period Date: "
 		return label
 	}()
 
 	private lazy var datePicker: UIDatePicker = {
-		let picker = UIDatePicker(frame: CGRect(x: self.view.bounds.minX + 16, y: self.lastPeriodLable.frame.maxY + 12, width: self.view.bounds.width - 32, height: 150))
+//		let picker = UIDatePicker(frame: CGRect(x: self.view.bounds.minX + 16, y: self.lastPeriodLable.frame.maxY + 12, width: self.view.bounds.width - 32, height: 150))
+		let picker = UIDatePicker()
+		picker.translatesAutoresizingMaskIntoConstraints = false
 		picker.datePickerMode = .date
 		picker.maximumDate = .now
 		picker.minimumDate = .distantPast
@@ -127,12 +72,14 @@ class UserSettingsVC: UIViewController {
 	}()
 
 	private lazy var buttonCalculate: UIButton = {
-		let button = UIButton(frame: CGRect(
-			x: self.view.bounds.midX - 120,
-			y: self.datePicker.frame.maxY + 12,
-			width: 240,
-			height: 56)
-		)
+//		let button = UIButton(frame: CGRect(
+//			x: self.view.bounds.midX - 120,
+//			y: self.datePicker.frame.maxY + 12,
+//			width: 240,
+//			height: 56)
+//		)
+		let button = UIButton()
+		button.translatesAutoresizingMaskIntoConstraints = false
 		button.backgroundColor = .white
 		button.setTitle("Calculate", for: .normal)
 		button.addTarget(self, action: #selector(self.goBackSaving), for: .touchUpInside)
@@ -145,21 +92,44 @@ class UserSettingsVC: UIViewController {
 		super.viewDidLoad()
 		self.fetchData()
 		self.setupViews()
+		self.setupConstraints()
 		self.setupNavigationBar()
 	}
 
 	private func setupViews() {
 		self.view.backgroundColor = UIColor(named: "backgroundColor")
-		view.frame = UIScreen.main.bounds
-//		view.addSubview(self.periodLengthLabelTitle)
-//		view.addSubview(self.periodLengthLabel)
+
 		view.addSubview(self.periodLengthView)
-//		view.addSubview(self.cycleLengthLabel)
-//		view.addSubview(self.cycleLengthTextField)
 		view.addSubview(self.cycleLengthView)
-		view.addSubview(self.datePicker)
-		view.addSubview(self.buttonCalculate)
-		view.addSubview(self.lastPeriodLable)
+//		view.addSubview(self.datePicker)
+//		view.addSubview(self.buttonCalculate)
+//		view.addSubview(self.lastPeriodLable)
+	}
+
+	private func setupConstraints() {
+		NSLayoutConstraint.activate([
+			periodLengthView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+			periodLengthView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+			periodLengthView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
+
+			cycleLengthView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+			cycleLengthView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+			cycleLengthView.topAnchor.constraint(equalTo: periodLengthView.bottomAnchor),
+
+//			lastPeriodLable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+//			lastPeriodLable.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+//			lastPeriodLable.topAnchor.constraint(equalTo: cycleLengthView.bottomAnchor),
+//			lastPeriodLable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//
+//			datePicker.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+//			datePicker.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+//			datePicker.topAnchor.constraint(equalTo: lastPeriodLable.bottomAnchor),
+
+//			buttonCalculate.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//			buttonCalculate.topAnchor.constraint(equalTo: periodLengthView.topAnchor, constant: 24),
+//			buttonCalculate.heightAnchor.constraint(equalToConstant: 56),
+//			buttonCalculate.widthAnchor.constraint(equalToConstant: 250)
+		])
 	}
 
 	private func setupNavigationBar() {
