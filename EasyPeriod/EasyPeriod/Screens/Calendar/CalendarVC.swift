@@ -18,47 +18,67 @@ class CalendarVC: UIViewController {
 	}
 	private var calendarModel: CalendarModel?
 
+	private var accentColor: UIColor = UIColor(named: "mainColor")! {
+		didSet {
+			self.nextPeriodDate.textColor = self.accentColor
+			self.nextPeriodMonth.textColor = self.accentColor
+			self.nextPeriodWeekday.textColor = self.accentColor
+			self.descriptionText.textColor = self.accentColor
+			self.buttonOne.backgroundColor = self.accentColor
+			self.buttonTwo.backgroundColor = self.accentColor
+			self.navigationItem.rightBarButtonItem?.tintColor = self.accentColor
+		}
+	}
+	private var mainColor: UIColor = .white {
+		didSet {
+			self.buttonOne.setTitleColor(self.mainColor, for: .normal)
+			self.buttonTwo.setTitleColor(self.mainColor, for: .normal)
+		}
+	}
+
 	private lazy var nextPeriodDate: UILabel = {
 		let label = UILabel(frame: CGRect(x: self.view.bounds.minX + 16, y: self.view.bounds.midY - 200, width: self.view.bounds.width - 32, height: 200))
 		label.font = .systemFont(ofSize: 150)
-		label.backgroundColor = .orange
+		label.textColor = self.accentColor
 		label.textAlignment = .center
 		return label
 	}()
 
 	private lazy var nextPeriodMonth: UILabel = {
-		let label = UILabel(frame: CGRect(x: self.view.bounds.minX + 16, y: self.nextPeriodDate.frame.maxY + 12, width: (self.view.bounds.width - 36) / 2, height: 50))
-		label.backgroundColor = .blue
+		let label = UILabel(frame: CGRect(x: self.view.bounds.minX + 16, y: self.nextPeriodDate.frame.maxY - 50, width: (self.view.bounds.width - 36) / 2, height: 50))
+		label.textColor = self.accentColor
 		label.textAlignment = .right
 		return label
 	}()
 
 	private lazy var nextPeriodWeekday: UILabel = {
 		let label = UILabel(frame: CGRect(x: self.nextPeriodMonth.frame.maxX + 8, y: self.nextPeriodMonth.frame.minY, width: (self.view.bounds.width - 36) / 2, height: 50))
-		label.backgroundColor = .systemPink
+		label.textColor = self.accentColor
 		return label
 	}()
 
 	private lazy var descriptionText: UILabel = {
 		let label = UILabel(frame: CGRect(x: self.view.bounds.minX + 16, y: self.nextPeriodMonth.frame.maxY + 12, width: self.view.bounds.width - 32, height: 50))
-		label.backgroundColor = .systemPink
+		label.textColor = self.accentColor
 		label.textAlignment = .center
 		return label
 	}()
 
 	private lazy var buttonOne: UIButton = {
-		let button = UIButton(frame: CGRect(x: self.view.bounds.midX - 70, y: self.descriptionText.frame.maxY + 12, width: 140, height: 50))
-		button.backgroundColor = UIColor(cgColor: CGColor(red: 256, green: 0, blue: 25, alpha: 100))
+		let button = UIButton(frame: CGRect(x: self.view.bounds.midX - 120, y: self.descriptionText.frame.maxY + 12, width: 240, height: 50))
+		button.backgroundColor = self.accentColor
 		button.layer.cornerRadius = 8
 		button.addTarget(self, action: #selector(self.buttonOneAction), for: .touchUpInside)
+		button.setTitleColor(self.mainColor, for: .normal)
 		return button
 	}()
 
 	private lazy var buttonTwo: UIButton = {
-		let button = UIButton(frame: CGRect(x: self.view.bounds.midX - 70, y: self.buttonOne.frame.maxY + 12, width: 140, height: 50))
-		button.backgroundColor = UIColor(cgColor: CGColor(red: 256, green: 0, blue: 25, alpha: 100))
+		let button = UIButton(frame: CGRect(x: self.view.bounds.midX - 120, y: self.buttonOne.frame.maxY + 12, width: 240, height: 50))
+		button.backgroundColor = self.accentColor
 		button.layer.cornerRadius = 8
 		button.addTarget(self, action: #selector(self.buttonTwoAction), for: .touchUpInside)
+		button.setTitleColor(self.mainColor, for: .normal)
 		return button
 	}()
 
@@ -87,21 +107,33 @@ class CalendarVC: UIViewController {
 		self.nextPeriodWeekday.text = DateCalculatiorService.shared.getWeekday(calendarModel.nextPeriodDate)
 		switch calendarModel.partOfCycle {
 			case .offPeriod:
+				self.view.backgroundColor = .white
 				self.descriptionText.text = "Next period"
 				self.buttonOne.setTitle("Started", for: .normal)
 				self.buttonTwo.isHidden = true
+				self.accentColor = UIColor(named: "mainColor")!
+				self.mainColor = .white
 			case .period:
+				self.view.backgroundColor = UIColor(named: "mainColor")
 				self.descriptionText.text = "Period is in progress"
 				self.buttonOne.setTitle("Period ended early", for: .normal)
 				self.buttonTwo.setTitle("Didn't start", for: .normal)
+				self.accentColor = .white
+				self.mainColor = UIColor(named: "mainColor")!
 			case .delay:
+				self.view.backgroundColor = .white
 				self.descriptionText.text = "You have a delay"
 				self.buttonOne.setTitle("Have started!!", for: .normal)
 				self.buttonTwo.isHidden = true
+				self.accentColor = UIColor(named: "mainColor")!
+				self.mainColor = .white
 			case .startDay:
+				self.view.backgroundColor = UIColor(named: "mainColor")
 				self.descriptionText.text = "Period started?"
 				self.buttonOne.setTitle("Yes", for: .normal)
 				self.buttonTwo.setTitle("No", for: .normal)
+				self.accentColor = .white
+				self.mainColor = UIColor(named: "mainColor")!
 		}
 	}
 
@@ -117,7 +149,7 @@ class CalendarVC: UIViewController {
 	}
 
 	private func setupNavigationBar() {
-		let navigationRightItem = UIImage(systemName: "gearshape.fill")
+		let navigationRightItem = UIImage(systemName: "gearshape")
 
 		navigationItem.rightBarButtonItem = UIBarButtonItem(
 			image: navigationRightItem,
@@ -125,9 +157,7 @@ class CalendarVC: UIViewController {
 			target: self,
 			action: #selector(action)
 		)
-		navigationItem.rightBarButtonItem?.tintColor = UIColor(
-			cgColor:  CGColor(red: 256, green: 0, blue: 25, alpha: 100)
-		)
+		navigationItem.rightBarButtonItem?.tintColor = self.accentColor
 	}
 
 	@objc func action() {
