@@ -21,8 +21,9 @@
 		4A6B637829F7E30900997332 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A6B637729F7E30900997332 /* Main.storyboard */; };
 		4A6B637A29F7F0FF00997332 /* UserSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B637929F7F0FF00997332 /* UserSettingsService.swift */; };
 		4A6B637C29F7F40C00997332 /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B637B29F7F40C00997332 /* CalendarVC.swift */; };
-		4A6B638529F80A6900997332 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B638429F80A6900997332 /* DropDownView.swift */; };
+		4A6B638529F80A6900997332 /* DropDownPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B638429F80A6900997332 /* DropDownPickerView.swift */; };
 		4A6B638A29F83CF600997332 /* CalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B638929F83CF600997332 /* CalendarModel.swift */; };
+		4ADC9B2F29FFBB550021F9BF /* DropDownDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC9B2E29FFBB550021F9BF /* DropDownDateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,8 +43,9 @@
 		4A6B637729F7E30900997332 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		4A6B637929F7F0FF00997332 /* UserSettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsService.swift; sourceTree = "<group>"; };
 		4A6B637B29F7F40C00997332 /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVC.swift; sourceTree = "<group>"; };
-		4A6B638429F80A6900997332 /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
+		4A6B638429F80A6900997332 /* DropDownPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownPickerView.swift; sourceTree = "<group>"; };
 		4A6B638929F83CF600997332 /* CalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarModel.swift; sourceTree = "<group>"; };
+		4ADC9B2E29FFBB550021F9BF /* DropDownDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownDateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,7 +148,8 @@
 		4A6B638329F80A4400997332 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4A6B638429F80A6900997332 /* DropDownView.swift */,
+				4A6B638429F80A6900997332 /* DropDownPickerView.swift */,
+				4ADC9B2E29FFBB550021F9BF /* DropDownDateView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -247,11 +250,12 @@
 				4A4F523D29FAD9C6003638C5 /* DateCalculatiorService.swift in Sources */,
 				4A6B636229F6E32500997332 /* AppDelegate.swift in Sources */,
 				4A4F524029FBC878003638C5 /* DateFormatter+Extention.swift in Sources */,
+				4ADC9B2F29FFBB550021F9BF /* DropDownDateView.swift in Sources */,
 				4A4A06FC29F980400050BAB4 /* PersistanceService.swift in Sources */,
 				4A6B636429F6E32500997332 /* SceneDelegate.swift in Sources */,
 				4A4A06FA29F96EC30050BAB4 /* SettingsModel.swift in Sources */,
 				4A4A06F829F937AE0050BAB4 /* DataModel.xcdatamodeld in Sources */,
-				4A6B638529F80A6900997332 /* DropDownView.swift in Sources */,
+				4A6B638529F80A6900997332 /* DropDownPickerView.swift in Sources */,
 				4A6B637A29F7F0FF00997332 /* UserSettingsService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

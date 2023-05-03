@@ -14,14 +14,14 @@ struct UserProfileService {
 
 	private init() {}
 
-	func isFirstLaunch() -> Bool {
-		if defaults.bool(forKey: "isFirstLaunch") {
-			defaults.set(false, forKey: "isAppAlreadyLaunchedOnce")
+	func isAppAlreadyLaunchedOnce() -> Bool {
+		if !defaults.bool(forKey: "isAppAlreadyLaunchedOnce") {
+			defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
 			print("App launched first time")
-			return true
+			return false
 		}
 		print("App already launched")
-		return false
+		return true
 	}
 
 	func getDelay() -> Bool {

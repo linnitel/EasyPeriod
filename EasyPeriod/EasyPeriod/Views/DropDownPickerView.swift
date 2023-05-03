@@ -1,5 +1,5 @@
 //
-//  DropDownView.swift
+//  DropDownPickerView.swift
 //  EasyPeriod
 //
 //  Created by Julia Martcenko on 25/04/2023.
@@ -7,17 +7,23 @@
 
 import UIKit
 
-class DropDownView: UIView {
+class DropDownPickerView: UIView {
+
+	var pickerData = [String]() {
+		didSet {
+			self.setNeedsLayout()
+		}
+	}
 
 	var order: Order = .middle {
 		didSet {
-			self.layoutSubviews()
+			self.setNeedsLayout()
 		}
 	}
 
 	var isOpen: Bool = false {
 		didSet {
-			self.layoutSubviews()
+			self.setNeedsLayout()
 		}
 	}
 
@@ -47,6 +53,8 @@ class DropDownView: UIView {
 	lazy var picker: UIPickerView = {
 		let picker = UIPickerView()
 		picker.translatesAutoresizingMaskIntoConstraints = false
+		picker.delegate = self
+		picker.dataSource = self
 		picker.backgroundColor = .white
 		return picker
 	}()
@@ -63,7 +71,7 @@ class DropDownView: UIView {
 		self.addSubview(valueLabel)
 		self.addSubview(picker)
 
-		self.bottomConstraint = self.valueLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -12)
+		self.bottomConstraint = self.labelTitle.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -12)
 		self.pickerTopConstraints = self.picker.topAnchor.constraint(equalTo: self.labelTitle.bottomAnchor, constant: 12)
 		self.pickerBottomConstraints = self.picker.bottomAnchor.constraint(equalTo: self.bottomAnchor)
 		self.pickerLeadingConstraints = self.picker.leadingAnchor.constraint(equalTo: self.leadingAnchor)
@@ -93,6 +101,11 @@ class DropDownView: UIView {
 			self.pickerBottomConstraints?.isActive = true
 			self.pickerLeadingConstraints?.isActive = true
 			self.pickerTrailingConstraints?.isActive = true
+			if let value = self.valueLabel.text,
+			   let intValue = Int(value),
+			   !pickerData.isEmpty {
+				self.picker.selectRow(intValue - 1, inComponent: 0, animated: false)
+			}
 		} else {
 			self.backgroundColor = .white
 			self.picker.isHidden = true
@@ -125,4 +138,27 @@ class DropDownView: UIView {
 		case middle
 		case isLast
 	}
+}
+
+extension DropDownPickerView: UIPickerViewDelegate {
+
+	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+		guard !pickerData.isEmpty else { return }
+		self.valueLabel.text = pickerData[row]
+	}
+}
+
+extension DropDownPickerView: UIPickerViewDataSource {
+	func numberOfComponents(in pickerView: UIPickerView) -> Int {
+		1
+	}
+
+	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+		pickerData.count
+	}
+
+	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+		return pickerData[row]
+	}
+
 }

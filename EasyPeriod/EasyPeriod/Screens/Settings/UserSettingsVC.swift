@@ -17,67 +17,47 @@ class UserSettingsVC: UIViewController {
 	private var datePersistance: [DateSettings] = []
 	private var settingsModel: SettingsModel?
 
-	private lazy var periodLengthView: DropDownView = {
-//		let view = DropDownView(frame: CGRect(
-//			x: self.view.bounds.minX + 16,
-//			y: self.view.bounds.midY - 200,
-//			width: self.view.bounds.width - 32,
-//			height: 50)
-//		)
-		let view = DropDownView()
+	private lazy var periodLengthView: DropDownPickerView = {
+		let view = DropDownPickerView()
 		view.translatesAutoresizingMaskIntoConstraints = false
 		view.labelTitle.text = "Period Length (In days): "
 		view.order = .isFirst
+		let arrayInt = Array<Int>(1...10)
+		var arrayString = [String]()
+		arrayInt.forEach {
+			arrayString.append(String($0))
+		}
+		view.pickerData = arrayString
 		return view
 	}()
 
-	private lazy var cycleLengthView: DropDownView = {
-//		let view = DropDownView(frame: CGRect(
-//			x: self.view.bounds.minX + 16,
-//			y: self.periodLengthView.frame.maxY,
-//			width: self.view.bounds.width - 32,
-//			height: 50)
-//		)
-		let view = DropDownView()
+	private lazy var cycleLengthView: DropDownPickerView = {
+		let view = DropDownPickerView()
 		view.translatesAutoresizingMaskIntoConstraints = false
 		view.labelTitle.text = "Cycle length (In days): "
 		view.order = .middle
+//		let arrayInt = Array<Int>(21...40)
+//		var arrayString = [String]()
+//		arrayInt.forEach {
+//			arrayString.append(String($0))
+//		}
+		view.pickerData = ["21", "22", "23", "24", "25",
+						   "26", "27", "28", "29", "30",
+						   "31", "32", "33", "34", "35",
+						   "36", "37", "38", "39", "40"]
 		return view
 	}()
 
-	private lazy var lastPeriodLable: UILabel = {
-//		let label = UILabel(frame: CGRect(
-//			x: self.view.bounds.minX + 16,
-//			y: self.cycleLengthView.frame.maxY,
-//			width: self.view.bounds.width - 32,
-//			height: 50))
-		let label = UILabel()
+	private lazy var previousDateView: DropDownDateView = {
+		let view = DropDownDateView()
 		view.translatesAutoresizingMaskIntoConstraints = false
-		label.font = label.font.withSize(17)
-		label.text = "Last period Date: "
-		return label
-	}()
-
-	private lazy var datePicker: UIDatePicker = {
-//		let picker = UIDatePicker(frame: CGRect(x: self.view.bounds.minX + 16, y: self.lastPeriodLable.frame.maxY + 12, width: self.view.bounds.width - 32, height: 150))
-		let picker = UIDatePicker()
-		picker.translatesAutoresizingMaskIntoConstraints = false
-		picker.datePickerMode = .date
-		picker.maximumDate = .now
-		picker.minimumDate = .distantPast
-		picker.preferredDatePickerStyle = .wheels
-		picker.subviews[0].subviews[0].subviews[0].alpha = 0
-		picker.calendar = Calendar(identifier: .gregorian)
-		return picker
+		view.labelTitle.text = "Last period Date: "
+		view.isOpen = false
+		view.order = .isLast
+		return view
 	}()
 
 	private lazy var buttonCalculate: UIButton = {
-//		let button = UIButton(frame: CGRect(
-//			x: self.view.bounds.midX - 120,
-//			y: self.datePicker.frame.maxY + 12,
-//			width: 240,
-//			height: 56)
-//		)
 		let button = UIButton()
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.backgroundColor = .white
@@ -101,9 +81,8 @@ class UserSettingsVC: UIViewController {
 
 		view.addSubview(self.periodLengthView)
 		view.addSubview(self.cycleLengthView)
-//		view.addSubview(self.datePicker)
-//		view.addSubview(self.buttonCalculate)
-//		view.addSubview(self.lastPeriodLable)
+		view.addSubview(self.buttonCalculate)
+		view.addSubview(self.previousDateView)
 	}
 
 	private func setupConstraints() {
@@ -116,19 +95,14 @@ class UserSettingsVC: UIViewController {
 			cycleLengthView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
 			cycleLengthView.topAnchor.constraint(equalTo: periodLengthView.bottomAnchor),
 
-//			lastPeriodLable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-//			lastPeriodLable.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-//			lastPeriodLable.topAnchor.constraint(equalTo: cycleLengthView.bottomAnchor),
-//			lastPeriodLable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//
-//			datePicker.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-//			datePicker.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-//			datePicker.topAnchor.constraint(equalTo: lastPeriodLable.bottomAnchor),
+			previousDateView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+			previousDateView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+			previousDateView.topAnchor.constraint(equalTo: cycleLengthView.bottomAnchor),
 
-//			buttonCalculate.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//			buttonCalculate.topAnchor.constraint(equalTo: periodLengthView.topAnchor, constant: 24),
-//			buttonCalculate.heightAnchor.constraint(equalToConstant: 56),
-//			buttonCalculate.widthAnchor.constraint(equalToConstant: 250)
+			buttonCalculate.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+			buttonCalculate.topAnchor.constraint(equalTo: previousDateView.bottomAnchor, constant: 24),
+			buttonCalculate.heightAnchor.constraint(equalToConstant: 56),
+			buttonCalculate.widthAnchor.constraint(equalToConstant: 240)
 		])
 	}
 
@@ -157,13 +131,16 @@ class UserSettingsVC: UIViewController {
 	}
 
 	@objc private func goBackSaving() {
-		// TODO: change for selectors
-		guard let periodLength = Int(self.periodLengthView.valueLabel.text!),
-			  let cycleLength = Int(self.cycleLengthView.valueLabel.text!) else {
+
+		guard let text = self.periodLengthView.valueLabel.text,
+			let periodLength = Int(text),
+			  let cycleText = self.cycleLengthView.valueLabel.text,
+			  let cycleLength = Int(cycleText) else {
+			// TODO: add alert that not all fields were filled
 				return
 			  }
 		let settingsModel = SettingsModel(
-			lastPeriodBeginDate: datePicker.date,
+			lastPeriodBeginDate: self.previousDateView.datePicker.date,
 			periodLength: periodLength,
 			cycleLength: cycleLength)
 		self.save(settingsModel: settingsModel) {
@@ -187,9 +164,11 @@ class UserSettingsVC: UIViewController {
 								periodLength: Int(date[0].periodLength),
 								cycleLength: Int(date[0].cycleLength)
 							)
-							self.cycleLengthView.valueLabel.text = String(self.settingsModel!.cycleLength)
 							self.periodLengthView.valueLabel.text = String(self.settingsModel!.periodLength)
-							self.datePicker.date = self.settingsModel!.lastPeriodBeginDate
+							self.cycleLengthView.valueLabel.text = String(self.settingsModel!.cycleLength)
+							self.previousDateView.datePicker.date = self.settingsModel!.lastPeriodBeginDate
+							let date = DateFormatter(dateFormat: "d.MM.yyyy", calendar: Calendar.current).string(from: self.settingsModel!.lastPeriodBeginDate)
+							self.previousDateView.valueLabel.text = date
 						}
 					}
 				case .failure(let error):

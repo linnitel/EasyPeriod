@@ -23,10 +23,10 @@ class Coordinator {
 }
 
 class AppCoordinator: Coordinator {
-
+	// TODO: add check for all fields are filled? with data
 	override func start() {
-		let isFirstLaunch = UserProfileService.shared.isFirstLaunch()
-		if isFirstLaunch {
+		let isAppAlreadyLaunchedOnce = UserProfileService.shared.isAppAlreadyLaunchedOnce()
+		if !isAppAlreadyLaunchedOnce {
 			let userSettingsVC = UserSettingsVC()
 			userSettingsVC.coordinator = self
 			userSettingsVC.isFirstLaunch = true
