@@ -20,46 +20,49 @@ class CalendarVC: UIViewController {
 
 	private var accentColor: UIColor = UIColor(named: "mainColor")! {
 		didSet {
-			self.nextPeriodDate.textColor = self.accentColor
-			self.nextPeriodMonth.textColor = self.accentColor
-			self.nextPeriodWeekday.textColor = self.accentColor
 			self.descriptionText.textColor = self.accentColor
 			self.buttonOne.backgroundColor = self.accentColor
 			self.buttonTwo.backgroundColor = self.accentColor
 			self.navigationItem.rightBarButtonItem?.tintColor = self.accentColor
+			self.drawDrop()
 		}
 	}
 	private var mainColor: UIColor = .white {
 		didSet {
 			self.buttonOne.setTitleColor(self.mainColor, for: .normal)
 			self.buttonTwo.setTitleColor(self.mainColor, for: .normal)
+			self.nextPeriodDate.textColor = self.mainColor
+			self.nextPeriodMonth.textColor = self.mainColor
+			self.nextPeriodWeekday.textColor = self.mainColor
 		}
 	}
+
+	private lazy var shape: UIView = {
+		let view = UIView(frame: CGRect(x: self.view.bounds.midX - 120, y: self.view.bounds.minY + 50, width: 240, height: 310))
+		view.backgroundColor = .clear
+		return view
+	}()
 
 	private lazy var nextPeriodDate: UILabel = {
 		let label = UILabel(frame: CGRect(x: self.view.bounds.minX + 16, y: self.view.bounds.midY - 200, width: self.view.bounds.width - 32, height: 200))
 		label.font = .systemFont(ofSize: 150)
-		label.textColor = self.accentColor
 		label.textAlignment = .center
 		return label
 	}()
 
 	private lazy var nextPeriodMonth: UILabel = {
 		let label = UILabel(frame: CGRect(x: self.view.bounds.minX + 16, y: self.nextPeriodDate.frame.maxY - 50, width: (self.view.bounds.width - 36) / 2, height: 50))
-		label.textColor = self.accentColor
 		label.textAlignment = .right
 		return label
 	}()
 
 	private lazy var nextPeriodWeekday: UILabel = {
 		let label = UILabel(frame: CGRect(x: self.nextPeriodMonth.frame.maxX + 8, y: self.nextPeriodMonth.frame.minY, width: (self.view.bounds.width - 36) / 2, height: 50))
-		label.textColor = self.accentColor
 		return label
 	}()
 
 	private lazy var descriptionText: UILabel = {
-		let label = UILabel(frame: CGRect(x: self.view.bounds.minX + 16, y: self.nextPeriodMonth.frame.maxY + 12, width: self.view.bounds.width - 32, height: 50))
-		label.textColor = self.accentColor
+		let label = UILabel(frame: CGRect(x: self.view.bounds.minX + 16, y: self.shape.frame.maxY + 12, width: self.view.bounds.width - 32, height: 50))
 		label.textAlignment = .center
 		return label
 	}()
@@ -69,7 +72,6 @@ class CalendarVC: UIViewController {
 		button.backgroundColor = self.accentColor
 		button.layer.cornerRadius = 8
 		button.addTarget(self, action: #selector(self.buttonOneAction), for: .touchUpInside)
-		button.setTitleColor(self.mainColor, for: .normal)
 		return button
 	}()
 
@@ -91,6 +93,7 @@ class CalendarVC: UIViewController {
 
 	override func viewWillAppear(_ animated: Bool) {
 		self.fetchData()
+
 	}
 
 	private func calculateData(for date: Date, cycle: Int, period: Int) {
@@ -140,12 +143,37 @@ class CalendarVC: UIViewController {
 	private func setupViews() {
 		view.backgroundColor = .white
 		view.frame = UIScreen.main.bounds
+		view.addSubview(self.shape)
 		view.addSubview(self.nextPeriodDate)
 		view.addSubview(self.nextPeriodMonth)
 		view.addSubview(self.nextPeriodWeekday)
 		view.addSubview(self.descriptionText)
 		view.addSubview(self.buttonOne)
 		view.addSubview(self.buttonTwo)
+	}
+
+	private func drawDrop() {
+		let path = UIBezierPath(
+			arcCenter: CGPoint(x: self.shape.bounds.midX, y: self.shape.bounds.maxY * 2 / 3),
+			radius: self.shape.bounds.midX * 0.85,
+			startAngle: 0,
+			endAngle: .pi,
+			clockwise: true)
+		path.addCurve(
+			to: CGPoint(x: self.shape.bounds.midX, y: self.shape.bounds.minY),
+			controlPoint1: CGPoint(x: self.shape.bounds.midX / 8, y: self.shape.bounds.midY * 3 / 4),
+			controlPoint2: CGPoint(x: self.shape.bounds.midX, y: self.shape.bounds.minY))
+		path.addCurve(
+			to: CGPoint(x: self.shape.bounds.midX + self.shape.bounds.midX * 0.85, y: self.shape.bounds.midY * 2 / 3 + self.shape.bounds.midX * 0.85),
+			controlPoint1: CGPoint(x: self.shape.bounds.midX + self.shape.bounds.midX * 7 / 8, y: self.shape.bounds.midY * 3 / 4),
+			controlPoint2: CGPoint(x: self.shape.bounds.midX + self.shape.bounds.midX * 0.85, y: self.shape.bounds.midY * 2 / 3 + self.shape.bounds.midX * 0.85))
+		path.close()
+		path.fill()
+
+		let shapeLayer = CAShapeLayer()
+		shapeLayer.path = path.cgPath
+		shapeLayer.fillColor = self.accentColor.cgColor
+		self.shape.layer.addSublayer(shapeLayer)
 	}
 
 	private func setupNavigationBar() {
