@@ -122,6 +122,8 @@ class UserSettingsVC: UIViewController {
 			navigationItem.leftBarButtonItem?.tintColor = UIColor(
 				cgColor:  UIColor(named: "mainColor")?.cgColor ?? CGColor(red: 0, green: 0, blue: 0, alpha: 100)
 			)
+		} else {
+			navigationItem.setHidesBackButton(true, animated: false)
 		}
 	}
 

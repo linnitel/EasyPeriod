@@ -27,11 +27,13 @@ class AppCoordinator: Coordinator {
 	override func start() {
 		let isAppAlreadyLaunchedOnce = UserProfileService.shared.isAppAlreadyLaunchedOnce()
 		if !isAppAlreadyLaunchedOnce {
+			let calendarVC = CalendarVC()
+			calendarVC.coordinator = self
 			let userSettingsVC = UserSettingsVC()
 			userSettingsVC.coordinator = self
 			userSettingsVC.isFirstLaunch = true
 			UserProfileService.shared.setDelay(false)
-			self.router?.setViewControllers([userSettingsVC], animated: false)
+			self.router?.setViewControllers([calendarVC, userSettingsVC], animated: false)
 		} else {
 			let calendarVC = CalendarVC()
 			calendarVC.coordinator = self
