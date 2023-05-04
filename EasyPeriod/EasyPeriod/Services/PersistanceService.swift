@@ -45,7 +45,7 @@ class PersistanceService {
 		let fetchRequest = DateSettings.fetchRequest()
 
 		do {
-			let dateSettings = try self.viewContext.fetch(fetchRequest) as! [DateSettings]
+			let dateSettings = try self.viewContext.fetch(fetchRequest) 
 			completion(.success(dateSettings))
 		} catch let error {
 			completion(.failure(error))

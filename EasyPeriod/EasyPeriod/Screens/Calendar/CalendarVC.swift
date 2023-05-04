@@ -24,7 +24,7 @@ class CalendarVC: UIViewController {
 			self.buttonOne.backgroundColor = self.accentColor
 			self.buttonTwo.backgroundColor = self.accentColor
 			self.navigationItem.rightBarButtonItem?.tintColor = self.accentColor
-			self.drawDrop()
+			self.shape.dropColor = self.accentColor
 		}
 	}
 	private var mainColor: UIColor = .white {
@@ -37,8 +37,8 @@ class CalendarVC: UIViewController {
 		}
 	}
 
-	private lazy var shape: UIView = {
-		let view = UIView(frame: CGRect(x: self.view.bounds.midX - 120, y: self.view.bounds.minY + 50, width: 240, height: 310))
+	private lazy var shape: DropShapeView = {
+		let view = DropShapeView(frame: CGRect(x: self.view.bounds.midX - 120, y: self.view.bounds.minY + 50, width: 240, height: 310))
 		view.backgroundColor = .clear
 		return view
 	}()
@@ -104,6 +104,7 @@ class CalendarVC: UIViewController {
 	}
 
 	private func setupContent() {
+
 		guard let calendarModel = self.calendarModel else { return }
 		self.nextPeriodDate.text = DateCalculatiorService.shared.getDay(calendarModel.nextPeriodDate)
 		self.nextPeriodMonth.text = DateCalculatiorService.shared.getMonth(calendarModel.nextPeriodDate)
@@ -150,30 +151,6 @@ class CalendarVC: UIViewController {
 		view.addSubview(self.descriptionText)
 		view.addSubview(self.buttonOne)
 		view.addSubview(self.buttonTwo)
-	}
-
-	private func drawDrop() {
-		let path = UIBezierPath(
-			arcCenter: CGPoint(x: self.shape.bounds.midX, y: self.shape.bounds.maxY * 2 / 3),
-			radius: self.shape.bounds.midX * 0.85,
-			startAngle: 0,
-			endAngle: .pi,
-			clockwise: true)
-		path.addCurve(
-			to: CGPoint(x: self.shape.bounds.midX, y: self.shape.bounds.minY),
-			controlPoint1: CGPoint(x: self.shape.bounds.midX / 8, y: self.shape.bounds.midY * 3 / 4),
-			controlPoint2: CGPoint(x: self.shape.bounds.midX, y: self.shape.bounds.minY))
-		path.addCurve(
-			to: CGPoint(x: self.shape.bounds.midX + self.shape.bounds.midX * 0.85, y: self.shape.bounds.midY * 2 / 3 + self.shape.bounds.midX * 0.85),
-			controlPoint1: CGPoint(x: self.shape.bounds.midX + self.shape.bounds.midX * 7 / 8, y: self.shape.bounds.midY * 3 / 4),
-			controlPoint2: CGPoint(x: self.shape.bounds.midX + self.shape.bounds.midX * 0.85, y: self.shape.bounds.midY * 2 / 3 + self.shape.bounds.midX * 0.85))
-		path.close()
-		path.fill()
-
-		let shapeLayer = CAShapeLayer()
-		shapeLayer.path = path.cgPath
-		shapeLayer.fillColor = self.accentColor.cgColor
-		self.shape.layer.addSublayer(shapeLayer)
 	}
 
 	private func setupNavigationBar() {
