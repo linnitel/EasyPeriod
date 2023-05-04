@@ -128,8 +128,10 @@ class UserSettingsVC: UIViewController {
 	}
 
 	@objc private func goBack() {
-		// TODO: add alert that date will not be saved
-		self.coordinator?.closeSettings()
+//		// TODO: add alert that date will not be saved
+//		self.coordinator?.closeSettings()
+
+		self.showGoBackAlert()
 	}
 
 	@objc private func goBackSaving() {
@@ -138,8 +140,8 @@ class UserSettingsVC: UIViewController {
 			let periodLength = Int(text),
 			  let cycleText = self.cycleLengthView.valueLabel.text,
 			  let cycleLength = Int(cycleText) else {
-			// TODO: add alert that not all fields were filled
-				return
+			self.showFillingAllFieldsAlert()
+			return
 			  }
 		let settingsModel = SettingsModel(
 			lastPeriodBeginDate: self.previousDateView.datePicker.date,
@@ -193,6 +195,38 @@ class UserSettingsVC: UIViewController {
 		}
 	}
 
+	// MARK: Alerts
 
+	private func showGoBackAlert() {
+		// Create Alert
+		var dialogMessage = UIAlertController(title: "Close screen", message: "Are you sure you want to close settings, the data will not be saved?", preferredStyle: .alert)
+		// Create OK button with action handler
+		let ok = UIAlertAction(title: "OK", style: .destructive, handler: { (action) -> Void in
+			print("Ok button tapped")
+			self.coordinator?.closeSettings()
+		})
+		// Create Cancel button with action handlder
+		let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
+			print("Cancel button tapped")
+		}
+		//Add OK and Cancel button to an Alert object
+		dialogMessage.addAction(ok)
+		dialogMessage.addAction(cancel)
+		// Present alert message to user
+		self.present(dialogMessage, animated: true, completion: nil)
+	}
+
+	private func showFillingAllFieldsAlert() {
+		// Create Alert
+		var dialogMessage = UIAlertController(title: "Fill in Settings", message: "Please fill all the fields with data to procede to the next screen.", preferredStyle: .alert)
+		// Create OK button with action handler
+		let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+			print("Ok button tapped")
+		})
+		//Add OK and Cancel button to an Alert object
+		dialogMessage.addAction(ok)
+		// Present alert message to user
+		self.present(dialogMessage, animated: true, completion: nil)
+	}
 }
 
