@@ -32,53 +32,53 @@ class CalendarVC: UIViewController {
 			self.buttonOne.setTitleColor(self.mainColor, for: .normal)
 			self.buttonTwo.setTitleColor(self.mainColor, for: .normal)
 			self.nextPeriodDate.textColor = self.mainColor
-			self.nextPeriodMonth.textColor = self.mainColor
-			self.nextPeriodWeekday.textColor = self.mainColor
+			self.nextPeriodMonthAndWeek.textColor = self.mainColor
 		}
 	}
 
 	private lazy var shape: DropShapeView = {
-		let view = DropShapeView(frame: CGRect(x: self.view.bounds.midX - 120, y: self.view.bounds.minY + 50, width: 240, height: 310))
+		let view = DropShapeView()
+		view.translatesAutoresizingMaskIntoConstraints = false
 		view.backgroundColor = .clear
 		return view
 	}()
 
 	private lazy var nextPeriodDate: UILabel = {
-		let label = UILabel(frame: CGRect(x: self.view.bounds.minX + 16, y: self.view.bounds.midY - 200, width: self.view.bounds.width - 32, height: 200))
+		let label = UILabel()
+		label.translatesAutoresizingMaskIntoConstraints = false
 		label.font = .systemFont(ofSize: 150)
 		label.textAlignment = .center
 		return label
 	}()
 
-	private lazy var nextPeriodMonth: UILabel = {
-		let label = UILabel(frame: CGRect(x: self.view.bounds.minX + 16, y: self.nextPeriodDate.frame.maxY - 50, width: (self.view.bounds.width - 36) / 2, height: 50))
+	private lazy var nextPeriodMonthAndWeek: UILabel = {
+		let label = UILabel()
+		label.translatesAutoresizingMaskIntoConstraints = false
 		label.textAlignment = .right
 		return label
 	}()
 
-	private lazy var nextPeriodWeekday: UILabel = {
-		let label = UILabel(frame: CGRect(x: self.nextPeriodMonth.frame.maxX + 8, y: self.nextPeriodMonth.frame.minY, width: (self.view.bounds.width - 36) / 2, height: 50))
-		return label
-	}()
-
 	private lazy var descriptionText: UILabel = {
-		let label = UILabel(frame: CGRect(x: self.view.bounds.minX + 16, y: self.shape.frame.maxY + 12, width: self.view.bounds.width - 32, height: 50))
+		let label = UILabel()
+		label.translatesAutoresizingMaskIntoConstraints = false
 		label.textAlignment = .center
 		return label
 	}()
 
 	private lazy var buttonOne: UIButton = {
-		let button = UIButton(frame: CGRect(x: self.view.bounds.midX - 120, y: self.descriptionText.frame.maxY + 12, width: 240, height: 50))
+		let button = UIButton()
+		button.translatesAutoresizingMaskIntoConstraints = false
 		button.backgroundColor = self.accentColor
-		button.layer.cornerRadius = 8
+		button.layer.cornerRadius = 28
 		button.addTarget(self, action: #selector(self.buttonOneAction), for: .touchUpInside)
 		return button
 	}()
 
 	private lazy var buttonTwo: UIButton = {
-		let button = UIButton(frame: CGRect(x: self.view.bounds.midX - 120, y: self.buttonOne.frame.maxY + 12, width: 240, height: 50))
+		let button = UIButton()
+		button.translatesAutoresizingMaskIntoConstraints = false
 		button.backgroundColor = self.accentColor
-		button.layer.cornerRadius = 8
+		button.layer.cornerRadius = 28
 		button.addTarget(self, action: #selector(self.buttonTwoAction), for: .touchUpInside)
 		button.setTitleColor(self.mainColor, for: .normal)
 		return button
@@ -88,6 +88,7 @@ class CalendarVC: UIViewController {
 		super.viewDidLoad()
 
 		self.setupViews()
+		self.setupConstraints()
 		self.setupNavigationBar()
 	}
 
@@ -107,8 +108,7 @@ class CalendarVC: UIViewController {
 
 		guard let calendarModel = self.calendarModel else { return }
 		self.nextPeriodDate.text = DateCalculatiorService.shared.getDay(calendarModel.nextPeriodDate)
-		self.nextPeriodMonth.text = DateCalculatiorService.shared.getMonth(calendarModel.nextPeriodDate)
-		self.nextPeriodWeekday.text = DateCalculatiorService.shared.getWeekday(calendarModel.nextPeriodDate)
+		self.nextPeriodMonthAndWeek.text = DateCalculatiorService.shared.getMonthAndWeek(calendarModel.nextPeriodDate)
 		switch calendarModel.partOfCycle {
 			case .offPeriod:
 				self.view.backgroundColor = .white
@@ -141,13 +141,40 @@ class CalendarVC: UIViewController {
 		}
 	}
 
+	private func setupConstraints() {
+		NSLayoutConstraint.activate([
+			self.shape.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+			self.shape.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
+			self.shape.widthAnchor.constraint(equalToConstant: 240),
+			self.shape.heightAnchor.constraint(equalToConstant: 320),
+
+			self.nextPeriodDate.centerXAnchor.constraint(equalTo: self.shape.centerXAnchor),
+			self.nextPeriodDate.centerYAnchor.constraint(equalTo: self.shape.centerYAnchor, constant: 30),
+
+			self.nextPeriodMonthAndWeek.topAnchor.constraint(equalTo: self.nextPeriodDate.bottomAnchor, constant: -20),
+			self.nextPeriodMonthAndWeek.centerXAnchor.constraint(equalTo: self.nextPeriodDate.centerXAnchor),
+
+			self.descriptionText.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+			self.descriptionText.topAnchor.constraint(equalTo: self.shape.bottomAnchor, constant: 30),
+
+			self.buttonOne.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+			self.buttonOne.topAnchor.constraint(equalTo: self.descriptionText.bottomAnchor, constant: 30),
+			self.buttonOne.widthAnchor.constraint(equalToConstant: 240),
+			self.buttonOne.heightAnchor.constraint(equalToConstant: 56),
+
+			self.buttonTwo.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+			self.buttonTwo.topAnchor.constraint(equalTo: self.buttonOne.bottomAnchor, constant: 16),
+			self.buttonTwo.widthAnchor.constraint(equalToConstant: 240),
+			self.buttonTwo.heightAnchor.constraint(equalToConstant: 56)
+			])
+	}
+
 	private func setupViews() {
 		view.backgroundColor = .white
 		view.frame = UIScreen.main.bounds
 		view.addSubview(self.shape)
 		view.addSubview(self.nextPeriodDate)
-		view.addSubview(self.nextPeriodMonth)
-		view.addSubview(self.nextPeriodWeekday)
+		view.addSubview(self.nextPeriodMonthAndWeek)
 		view.addSubview(self.descriptionText)
 		view.addSubview(self.buttonOne)
 		view.addSubview(self.buttonTwo)

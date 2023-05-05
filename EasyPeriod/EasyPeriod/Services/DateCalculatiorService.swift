@@ -32,17 +32,17 @@ class DateCalculatiorService {
 	}
 
 	func calculateState(_ nextDate: Date, cycle: Int, period: Int, delay: Bool) -> CalendarModel.PartOfCycle {
-		if delay {
-			return .delay
-		}
-		let now = Date()
-		let endPeriod = Calendar.current.date(byAdding: .day, value: period, to: nextDate)!
-		if Calendar.current.isDate(now, equalTo: nextDate, toGranularity: .day) {
+//		if delay {
+//			return .delay
+//		}
+//		let now = Date()
+//		let endPeriod = Calendar.current.date(byAdding: .day, value: period, to: nextDate)!
+//		if Calendar.current.isDate(now, equalTo: nextDate, toGranularity: .day) {
 			return .startDay
-		} else if now < nextDate {
-			return .offPeriod
-		}
-		return .period
+//		} else if now < nextDate {
+//			return .offPeriod
+//		}
+//		return .period
 	}
 
 	func getDay(_ date: Date) -> String {
@@ -50,13 +50,8 @@ class DateCalculatiorService {
 		return formatter.string(from: date)
 	}
 
-	func getMonth(_ date: Date) -> String {
-		let formatter = DateFormatter(dateFormat: "LLLL", calendar: Calendar.current)
-		return formatter.string(from: date)
-	}
-
-	func getWeekday(_ date: Date) -> String {
-		let formatter = DateFormatter(dateFormat: "EE", calendar: Calendar.current)
+	func getMonthAndWeek(_ date: Date) -> String {
+		let formatter = DateFormatter(dateFormat: "MMMM, E", calendar: Calendar.current)
 		return formatter.string(from: date)
 	}
 }
