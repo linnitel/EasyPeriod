@@ -123,6 +123,7 @@ class CalendarVC: UIViewController {
 				self.buttonOne.setTitle("Period ended early", for: .normal)
 				self.buttonTwo.setTitle("Didn't start", for: .normal)
 				self.accentColor = .white
+				self.buttonTwo.isHidden = false
 				self.mainColor = UIColor(named: "mainColor")!
 			case .delay:
 				self.view.backgroundColor = .white
@@ -136,6 +137,7 @@ class CalendarVC: UIViewController {
 				self.descriptionText.text = "Period started?"
 				self.buttonOne.setTitle("Yes", for: .normal)
 				self.buttonTwo.setTitle("No", for: .normal)
+				self.buttonTwo.isHidden = false
 				self.accentColor = .white
 				self.mainColor = UIColor(named: "mainColor")!
 		}
