@@ -60,6 +60,7 @@ class DropDownDateView: UIView {
 		picker.subviews[0].subviews[0].subviews[0].alpha = 0
 		picker.calendar = Calendar(identifier: .gregorian)
 		picker.addTarget(self, action: #selector(onDateValueChanged(_:)), for: .valueChanged)
+		picker.backgroundColor = .white
 		return picker
 	}()
 

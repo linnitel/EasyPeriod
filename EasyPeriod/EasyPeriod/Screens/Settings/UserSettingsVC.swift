@@ -168,8 +168,8 @@ class UserSettingsVC: UIViewController {
 								periodLength: Int(date[0].periodLength),
 								cycleLength: Int(date[0].cycleLength)
 							)
-							self.periodLengthView.valueLabel.text = String(self.settingsModel!.periodLength)
 							self.cycleLengthView.valueLabel.text = String(self.settingsModel!.cycleLength)
+							self.periodLengthView.valueLabel.text = String(self.settingsModel!.periodLength)
 							self.previousDateView.datePicker.date = self.settingsModel!.lastPeriodBeginDate
 							let date = DateFormatter(dateFormat: "d.MM.yyyy", calendar: Calendar.current).string(from: self.settingsModel!.lastPeriodBeginDate)
 							self.previousDateView.valueLabel.text = date
@@ -199,7 +199,7 @@ class UserSettingsVC: UIViewController {
 
 	private func showGoBackAlert() {
 		// Create Alert
-		var dialogMessage = UIAlertController(title: "Close screen", message: "Are you sure you want to close settings, the data will not be saved?", preferredStyle: .alert)
+		let dialogMessage = UIAlertController(title: "Close screen", message: "Are you sure you want to close settings, the data will not be saved?", preferredStyle: .alert)
 		// Create OK button with action handler
 		let ok = UIAlertAction(title: "OK", style: .destructive, handler: { (action) -> Void in
 			print("Ok button tapped")
@@ -218,7 +218,7 @@ class UserSettingsVC: UIViewController {
 
 	private func showFillingAllFieldsAlert() {
 		// Create Alert
-		var dialogMessage = UIAlertController(title: "Fill in Settings", message: "Please fill all the fields with data to procede to the next screen.", preferredStyle: .alert)
+		let dialogMessage = UIAlertController(title: "Fill in Settings", message: "Please fill all the fields with data to procede to the next screen.", preferredStyle: .alert)
 		// Create OK button with action handler
 		let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
 			print("Ok button tapped")
