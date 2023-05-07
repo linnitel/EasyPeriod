@@ -128,11 +128,6 @@ class DropDownPickerView: UIView {
 		}
 	}
 
-	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-		self.isOpen.toggle()
-		self.picker.isHidden.toggle()
-	}
-
 	enum Order {
 		case isFirst
 		case middle

@@ -128,11 +128,6 @@ class DropDownDateView: UIView {
 		}
 	}
 
-	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-		self.isOpen.toggle()
-		self.datePicker.isHidden.toggle()
-	}
-
 	@objc private func onDateValueChanged(_ datePicker: UIDatePicker) {
 		let date = DateFormatter(dateFormat: "d.MM.yyyy", calendar: Calendar.current).string(from: datePicker.date)
 		self.valueLabel.text = date

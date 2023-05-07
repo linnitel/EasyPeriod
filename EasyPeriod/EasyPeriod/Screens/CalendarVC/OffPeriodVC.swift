@@ -1,5 +1,5 @@
 //
-//  CalendarVC.swift
+//  OffPeriodVC.swift
 //  EasyPeriod
 //
 //  Created by Julia Martcenko on 25/04/2023.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CalendarVC: UIViewController {
+class OffPeriodVC: UIViewController {
 	
 	weak public var coordinator: AppCoordinator?
 

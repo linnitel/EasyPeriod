@@ -20,10 +20,10 @@
 		4A6B637629F6E61700997332 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B637529F6E61700997332 /* Coordinator.swift */; };
 		4A6B637829F7E30900997332 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A6B637729F7E30900997332 /* Main.storyboard */; };
 		4A6B637A29F7F0FF00997332 /* UserSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B637929F7F0FF00997332 /* UserSettingsService.swift */; };
-		4A6B637C29F7F40C00997332 /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B637B29F7F40C00997332 /* CalendarVC.swift */; };
 		4A6B638529F80A6900997332 /* DropDownPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B638429F80A6900997332 /* DropDownPickerView.swift */; };
-		4A6B638A29F83CF600997332 /* CalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B638929F83CF600997332 /* CalendarModel.swift */; };
 		4A6D20342A0442A4009FD307 /* DropShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6D20332A0442A4009FD307 /* DropShapeView.swift */; };
+		4A77AC9F2A06841500A9E437 /* CalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A77AC9D2A06841500A9E437 /* CalendarModel.swift */; };
+		4A77ACA02A06841500A9E437 /* OffPeriodVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A77AC9E2A06841500A9E437 /* OffPeriodVC.swift */; };
 		4ADC9B2F29FFBB550021F9BF /* DropDownDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC9B2E29FFBB550021F9BF /* DropDownDateView.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,10 +43,10 @@
 		4A6B637529F6E61700997332 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		4A6B637729F7E30900997332 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		4A6B637929F7F0FF00997332 /* UserSettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsService.swift; sourceTree = "<group>"; };
-		4A6B637B29F7F40C00997332 /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVC.swift; sourceTree = "<group>"; };
 		4A6B638429F80A6900997332 /* DropDownPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownPickerView.swift; sourceTree = "<group>"; };
-		4A6B638929F83CF600997332 /* CalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarModel.swift; sourceTree = "<group>"; };
 		4A6D20332A0442A4009FD307 /* DropShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropShapeView.swift; sourceTree = "<group>"; };
+		4A77AC9D2A06841500A9E437 /* CalendarModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarModel.swift; sourceTree = "<group>"; };
+		4A77AC9E2A06841500A9E437 /* OffPeriodVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffPeriodVC.swift; sourceTree = "<group>"; };
 		4ADC9B2E29FFBB550021F9BF /* DropDownDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownDateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -131,8 +131,8 @@
 		4A6B638129F7F48D00997332 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				4A77AC9C2A06841500A9E437 /* CalendarVC */,
 				4A6B638829F83CE000997332 /* Settings */,
-				4A6B638629F83CCA00997332 /* Calendar */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -157,15 +157,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		4A6B638629F83CCA00997332 /* Calendar */ = {
-			isa = PBXGroup;
-			children = (
-				4A6B637B29F7F40C00997332 /* CalendarVC.swift */,
-				4A6B638929F83CF600997332 /* CalendarModel.swift */,
-			);
-			path = Calendar;
-			sourceTree = "<group>";
-		};
 		4A6B638829F83CE000997332 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +164,15 @@
 				4A4A06F929F96EC30050BAB4 /* SettingsModel.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		4A77AC9C2A06841500A9E437 /* CalendarVC */ = {
+			isa = PBXGroup;
+			children = (
+				4A77AC9D2A06841500A9E437 /* CalendarModel.swift */,
+				4A77AC9E2A06841500A9E437 /* OffPeriodVC.swift */,
+			);
+			path = CalendarVC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,14 +247,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A6B637629F6E61700997332 /* Coordinator.swift in Sources */,
-				4A6B638A29F83CF600997332 /* CalendarModel.swift in Sources */,
 				4A6B636629F6E32500997332 /* UserSettingsVC.swift in Sources */,
-				4A6B637C29F7F40C00997332 /* CalendarVC.swift in Sources */,
+				4A77ACA02A06841500A9E437 /* OffPeriodVC.swift in Sources */,
 				4A4F523D29FAD9C6003638C5 /* DateCalculatiorService.swift in Sources */,
 				4A6B636229F6E32500997332 /* AppDelegate.swift in Sources */,
 				4A4F524029FBC878003638C5 /* DateFormatter+Extention.swift in Sources */,
 				4ADC9B2F29FFBB550021F9BF /* DropDownDateView.swift in Sources */,
 				4A4A06FC29F980400050BAB4 /* PersistanceService.swift in Sources */,
+				4A77AC9F2A06841500A9E437 /* CalendarModel.swift in Sources */,
 				4A6B636429F6E32500997332 /* SceneDelegate.swift in Sources */,
 				4A4A06FA29F96EC30050BAB4 /* SettingsModel.swift in Sources */,
 				4A6D20342A0442A4009FD307 /* DropShapeView.swift in Sources */,

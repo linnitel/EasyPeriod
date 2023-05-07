@@ -27,7 +27,7 @@ class AppCoordinator: Coordinator {
 	override func start() {
 		let isAppAlreadyLaunchedOnce = UserProfileService.shared.isAppAlreadyLaunchedOnce()
 		if !isAppAlreadyLaunchedOnce {
-			let calendarVC = CalendarVC()
+			let calendarVC = OffPeriodVC()
 			calendarVC.coordinator = self
 			let userSettingsVC = UserSettingsVC()
 			userSettingsVC.coordinator = self
@@ -35,7 +35,7 @@ class AppCoordinator: Coordinator {
 			UserProfileService.shared.setDelay(false)
 			self.router?.setViewControllers([calendarVC, userSettingsVC], animated: false)
 		} else {
-			let calendarVC = CalendarVC()
+			let calendarVC = OffPeriodVC()
 			calendarVC.coordinator = self
 			self.router?.setViewControllers([calendarVC], animated: false)
 		}
@@ -49,7 +49,7 @@ class AppCoordinator: Coordinator {
 	}
 
 	func openCalendar() {
-		let calendarVC = CalendarVC()
+		let calendarVC = OffPeriodVC()
 		calendarVC.coordinator = self
 		self.router?.pushViewController(calendarVC, animated: true)
 	}

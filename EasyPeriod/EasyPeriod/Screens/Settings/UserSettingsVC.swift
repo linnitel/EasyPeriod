@@ -28,6 +28,8 @@ class UserSettingsVC: UIViewController {
 			arrayString.append(String($0))
 		}
 		view.pickerData = arrayString
+		let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.periodLengthAction))
+		view.addGestureRecognizer(gesture)
 		return view
 	}()
 
@@ -45,6 +47,8 @@ class UserSettingsVC: UIViewController {
 						   "26", "27", "28", "29", "30",
 						   "31", "32", "33", "34", "35",
 						   "36", "37", "38", "39", "40"]
+		let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.cycleLengthAction))
+		view.addGestureRecognizer(gesture)
 		return view
 	}()
 
@@ -54,6 +58,8 @@ class UserSettingsVC: UIViewController {
 		view.labelTitle.text = "Last period Date: "
 		view.isOpen = false
 		view.order = .isLast
+		let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.previousDateAction))
+		view.addGestureRecognizer(gesture)
 		return view
 	}()
 
@@ -227,6 +233,37 @@ class UserSettingsVC: UIViewController {
 		dialogMessage.addAction(ok)
 		// Present alert message to user
 		self.present(dialogMessage, animated: true, completion: nil)
+	}
+
+	// MARK: gestures
+	@objc func periodLengthAction(sender : UITapGestureRecognizer) {
+		self.periodLengthView.isOpen.toggle()
+		self.periodLengthView.picker.isHidden.toggle()
+
+		self.cycleLengthView.isOpen = false
+		self.cycleLengthView.picker.isHidden = true
+		self.previousDateView.isOpen = false
+		self.previousDateView.datePicker.isHidden = true
+	}
+
+	@objc func cycleLengthAction(sender : UITapGestureRecognizer) {
+		self.cycleLengthView.isOpen.toggle()
+		self.cycleLengthView.picker.isHidden.toggle()
+
+		self.periodLengthView.isOpen = false
+		self.periodLengthView.picker.isHidden = true
+		self.previousDateView.isOpen = false
+		self.previousDateView.datePicker.isHidden = true
+	}
+
+	@objc func previousDateAction(sender : UITapGestureRecognizer) {
+		self.previousDateView.isOpen.toggle()
+		self.previousDateView.datePicker.isHidden.toggle()
+
+		self.cycleLengthView.isOpen = false
+		self.cycleLengthView.picker.isHidden = true
+		self.periodLengthView.isOpen = false
+		self.periodLengthView.picker.isHidden = true
 	}
 }
 
