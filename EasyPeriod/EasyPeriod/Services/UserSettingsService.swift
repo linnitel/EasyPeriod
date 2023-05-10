@@ -32,4 +32,12 @@ struct UserProfileService {
 		defaults.set(delay, forKey: "delay")
 	}
 
+	func getIsPeriod() -> Bool {
+		defaults.bool(forKey: "isPeriod")
+	}
+
+	func setIsPeriod(_ isPeriod: Bool) {
+		defaults.set(isPeriod, forKey: "isPeriod")
+	}
+
 }

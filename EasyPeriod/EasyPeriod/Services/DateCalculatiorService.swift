@@ -13,37 +13,69 @@ class DateCalculatiorService {
 
 	private init() {}
 
-	func calculateDate(_ date: Date, cycle: Int, period: Int, delay: Bool) -> Date {
+	func calculateStartDate(_ date: Date, cycle: Int, period: Int) -> Date {
 		let now = Date()
-		if delay {
-			return now
-		}
-		let possiblePeriod = Calendar.current.date(byAdding: .day, value: period, to: date)!
-		if date > now, date < possiblePeriod || Calendar.current.isDate(now, equalTo: date, toGranularity: .day) {
-			return date
-		}
-		var nextDate = Calendar.current.date(byAdding: .day, value: cycle, to: date)!
+		var nextDate = date
+
+
 		while nextDate < now {
 			nextDate = Calendar.current.date(byAdding: .day, value: cycle, to: nextDate)!
 		}
-//		if Calendar.current.isDate(now, equalTo: nextDate, toGranularity: .day) {
-//		}
+		nextDate = Calendar.current.date(byAdding: .day, value: -cycle, to: nextDate)!
+		let endDate = Calendar.current.date(byAdding: .day, value: period, to: nextDate)!
+		
+		if now > endDate {
+			nextDate = Calendar.current.date(byAdding: .day, value: cycle, to: nextDate)!
+		}
 		return nextDate
 	}
 
-	func calculateState(_ nextDate: Date, cycle: Int, period: Int, delay: Bool) -> CalendarModel.PartOfCycle {
-		if delay {
-			return .delay
-		}
-		let now = Date()
-		let endPeriod = Calendar.current.date(byAdding: .day, value: period, to: nextDate)!
-		if Calendar.current.isDate(now, equalTo: nextDate, toGranularity: .day) {
-			return .startDay
-		} else if now < nextDate {
-			return .offPeriod
-		}
-		return .period
+	func calculateEndDate(_ startDate: Date, period: Int) -> Date {
+		Calendar.current.date(byAdding: .day, value: period, to: startDate)!
 	}
+
+	func isPeriod(startDate: Date, endDate: Date) -> Bool {
+		let now = Date()
+		if now >= startDate, now <= endDate {
+			return true
+		} else if Calendar.current.isDate(now, equalTo: startDate, toGranularity: .day) ||
+					Calendar.current.isDate(now, equalTo: endDate, toGranularity: .day) {
+			return true
+		}
+		return false
+	}
+
+//	func calculateDate(_ date: Date, cycle: Int, period: Int, delay: Bool, isPeriod: Bool) -> Date {
+//		let now = Date()
+//		if delay || isPeriod {
+//			return now
+//		}
+//		let possiblePeriod = Calendar.current.date(byAdding: .day, value: period, to: date)!
+//		if date > now, date <= possiblePeriod || Calendar.current.isDate(now, equalTo: date, toGranularity: .day) || Calendar.current.isDate(possiblePeriod, equalTo: date, toGranularity: .day) {
+//			return now
+//		}
+//		var nextDate = Calendar.current.date(byAdding: .day, value: cycle, to: date)!
+//		while nextDate < now {
+//			nextDate = Calendar.current.date(byAdding: .day, value: cycle, to: nextDate)!
+//		}
+//		if Calendar.current.isDate(now, equalTo: nextDate, toGranularity: .day) {
+//		}
+//		return nextDate
+//	}
+
+//	func calculateState(_ nextDate: Date, cycle: Int, period: Int, delay: Bool) -> OffPeriodModel.PartOfCycle {
+//		if delay {
+//			return .delay
+//		}
+//		let now = Date()
+//		let endPeriod = Calendar.current.date(byAdding: .day, value: period, to: nextDate)!
+//		if Calendar.current.isDate(now, equalTo: nextDate, toGranularity: .day) {
+//			return .startDay
+//		} else if now < nextDate {
+//			return .offPeriod
+//		}
+//		return .period
+//	}
 
 	func getDay(_ date: Date) -> String {
 		let formatter = DateFormatter(dateFormat: "d", calendar: Calendar.current)

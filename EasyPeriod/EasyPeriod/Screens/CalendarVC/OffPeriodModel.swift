@@ -1,5 +1,5 @@
 //
-//  CalendarModel.swift
+//  OffPeriodModel.swift
 //  EasyPeriod
 //
 //  Created by Julia Martcenko on 25/04/2023.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct CalendarModel {
-	var nextPeriodDate: Date
+struct OffPeriodModel {
+	var date: Date
 	var partOfCycle: PartOfCycle
 
 	enum PartOfCycle {

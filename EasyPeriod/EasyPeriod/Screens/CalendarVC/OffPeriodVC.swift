@@ -16,7 +16,11 @@ class OffPeriodVC: UIViewController {
 	private var delay: Bool {
 		UserProfileService.shared.getDelay()
 	}
-	private var calendarModel: CalendarModel?
+
+	private var isPeriod: Bool {
+		UserProfileService.shared.getIsPeriod()
+	}
+	private var calendarModel: OffPeriodModel?
 
 	private var accentColor: UIColor = UIColor(named: "mainColor")! {
 		didSet {
@@ -33,6 +37,7 @@ class OffPeriodVC: UIViewController {
 			self.buttonTwo.setTitleColor(self.mainColor, for: .normal)
 			self.nextPeriodDate.textColor = self.mainColor
 			self.nextPeriodMonthAndWeek.textColor = self.mainColor
+			self.view.backgroundColor = self.mainColor
 		}
 	}
 
@@ -98,27 +103,46 @@ class OffPeriodVC: UIViewController {
 	}
 
 	private func calculateData(for date: Date, cycle: Int, period: Int) {
-		let nextPeriodDate = DateCalculatiorService.shared.calculateDate(date, cycle: cycle, period: period, delay: delay)
-		let partOfCycle = DateCalculatiorService.shared.calculateState(nextPeriodDate, cycle: cycle, period: period, delay: delay)
-		self.calendarModel = CalendarModel(nextPeriodDate: nextPeriodDate, partOfCycle: partOfCycle)
+
+		let periodStartDate = DateCalculatiorService.shared.calculateStartDate(date, cycle: cycle, period: period)
+		let periodEndDate = DateCalculatiorService.shared.calculateEndDate(periodStartDate, period: period)
+		var showDate: Date
+		var partOfCycle: OffPeriodModel.PartOfCycle
+
+		if delay {
+			showDate = Date()
+			partOfCycle = .delay
+			self.calendarModel = OffPeriodModel(date: showDate, partOfCycle: partOfCycle)
+			setupContent()
+			return
+		}
+
+		let isPeriodCheck = DateCalculatiorService.shared.isPeriod(startDate: periodStartDate, endDate: periodEndDate)
+		UserProfileService.shared.setIsPeriod(isPeriodCheck)
+		if isPeriodCheck {
+			partOfCycle = .period
+			showDate = Date()
+		} else {
+			showDate = periodStartDate
+			partOfCycle = .offPeriod
+		}
+		self.calendarModel = OffPeriodModel(date: showDate, partOfCycle: partOfCycle)
 		setupContent()
 	}
 
 	private func setupContent() {
 
 		guard let calendarModel = self.calendarModel else { return }
-		self.nextPeriodDate.text = DateCalculatiorService.shared.getDay(calendarModel.nextPeriodDate)
-		self.nextPeriodMonthAndWeek.text = DateCalculatiorService.shared.getMonthAndWeek(calendarModel.nextPeriodDate)
+		self.nextPeriodDate.text = DateCalculatiorService.shared.getDay(calendarModel.date)
+		self.nextPeriodMonthAndWeek.text = DateCalculatiorService.shared.getMonthAndWeek(calendarModel.date)
 		switch calendarModel.partOfCycle {
 			case .offPeriod:
-				self.view.backgroundColor = .white
 				self.descriptionText.text = "Next period"
 				self.buttonOne.setTitle("Started", for: .normal)
 				self.buttonTwo.isHidden = true
 				self.accentColor = UIColor(named: "mainColor")!
 				self.mainColor = .white
 			case .period:
-				self.view.backgroundColor = UIColor(named: "mainColor")
 				self.descriptionText.text = "Period is in progress"
 				self.buttonOne.setTitle("Period ended early", for: .normal)
 				self.buttonTwo.setTitle("Didn't start", for: .normal)
@@ -126,14 +150,12 @@ class OffPeriodVC: UIViewController {
 				self.buttonTwo.isHidden = false
 				self.mainColor = UIColor(named: "mainColor")!
 			case .delay:
-				self.view.backgroundColor = .white
 				self.descriptionText.text = "You have a delay"
 				self.buttonOne.setTitle("Have started!!", for: .normal)
 				self.buttonTwo.isHidden = true
 				self.accentColor = UIColor(named: "mainColor")!
 				self.mainColor = .white
 			case .startDay:
-				self.view.backgroundColor = UIColor(named: "mainColor")
 				self.descriptionText.text = "Period started?"
 				self.buttonOne.setTitle("Yes", for: .normal)
 				self.buttonTwo.setTitle("No", for: .normal)
@@ -203,17 +225,17 @@ class OffPeriodVC: UIViewController {
 		switch partOfCycle {
 			case .offPeriod:
 				self.calendarModel?.partOfCycle = .period
-				self.calendarModel?.nextPeriodDate = Date()
+				self.calendarModel?.date = Date()
 			case .period:
 				self.calendarModel?.partOfCycle = .offPeriod
 			case .delay:
 				self.calendarModel?.partOfCycle = .period
-				self.calendarModel?.nextPeriodDate = Date()
+				self.calendarModel?.date = Date()
 				UserProfileService.shared.setDelay(false)
 				// add alert
 			case .startDay:
 				self.calendarModel?.partOfCycle = .period
-				self.calendarModel?.nextPeriodDate = Date()
+				self.calendarModel?.date = Date()
 		}
 		self.setupContent()
 		self.view.layoutSubviews()
@@ -252,6 +274,20 @@ class OffPeriodVC: UIViewController {
 				case .failure(let error):
 					print(error.localizedDescription)
 			}
+		}
+	}
+
+	private func save(settingsModel: SettingsModel, completion: ()-> Void) {
+		defer {
+			completion()
+		}
+
+		if self.datePersistance.isEmpty {
+			PersistanceService.shared.create(settingsModel) { settingsModel in
+				return
+			}
+		} else {
+			PersistanceService.shared.update(self.datePersistance[0], with: settingsModel)
 		}
 	}
 }
