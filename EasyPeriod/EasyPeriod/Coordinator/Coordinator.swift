@@ -25,6 +25,7 @@ class Coordinator {
 class AppCoordinator: Coordinator {
 	// TODO: add check for all fields are filled? with data
 	override func start() {
+		
 		let isAppAlreadyLaunchedOnce = UserProfileService.shared.isAppAlreadyLaunchedOnce()
 		if !isAppAlreadyLaunchedOnce {
 			let calendarVC = OffPeriodVC()

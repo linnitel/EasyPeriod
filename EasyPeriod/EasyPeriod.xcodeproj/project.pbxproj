@@ -169,8 +169,8 @@
 		4A77AC9C2A06841500A9E437 /* CalendarVC */ = {
 			isa = PBXGroup;
 			children = (
-				4A77AC9D2A06841500A9E437 /* OffPeriodModel.swift */,
 				4A77AC9E2A06841500A9E437 /* OffPeriodVC.swift */,
+				4A77AC9D2A06841500A9E437 /* OffPeriodModel.swift */,
 			);
 			path = CalendarVC;
 			sourceTree = "<group>";

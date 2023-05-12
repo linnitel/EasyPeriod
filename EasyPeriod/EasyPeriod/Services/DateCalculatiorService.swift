@@ -16,7 +16,9 @@ class DateCalculatiorService {
 	func calculateStartDate(_ date: Date, cycle: Int, period: Int) -> Date {
 		let now = Date()
 		var nextDate = date
-
+		if nextDate > now {
+			return nextDate
+		}
 
 		while nextDate < now {
 			nextDate = Calendar.current.date(byAdding: .day, value: cycle, to: nextDate)!
@@ -43,6 +45,10 @@ class DateCalculatiorService {
 			return true
 		}
 		return false
+	}
+
+	func getNextPriodDate(_ date: Date, cycle: Int) -> Date {
+		Calendar.current.date(byAdding: .day, value: cycle, to: date)!
 	}
 
 //	func calculateDate(_ date: Date, cycle: Int, period: Int, delay: Bool, isPeriod: Bool) -> Date {

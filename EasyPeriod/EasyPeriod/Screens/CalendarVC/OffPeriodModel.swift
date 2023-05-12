@@ -10,11 +10,12 @@ import Foundation
 struct OffPeriodModel {
 	var date: Date
 	var partOfCycle: PartOfCycle
+	var period: Int
+	var cycle: Int
 
 	enum PartOfCycle {
 		case offPeriod
 		case period
 		case delay
-		case startDay
 	}
 }

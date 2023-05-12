@@ -5,7 +5,6 @@
 //  Created by Julia Martcenko on 25/04/2023.
 //
 
-import Foundation
 import UIKit
 
 class OffPeriodVC: UIViewController {
@@ -98,7 +97,7 @@ class OffPeriodVC: UIViewController {
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
-		self.fetchData()
+		self.fetchData() {}
 
 	}
 
@@ -112,7 +111,7 @@ class OffPeriodVC: UIViewController {
 		if delay {
 			showDate = Date()
 			partOfCycle = .delay
-			self.calendarModel = OffPeriodModel(date: showDate, partOfCycle: partOfCycle)
+			self.calendarModel = OffPeriodModel(date: showDate, partOfCycle: partOfCycle, period: period, cycle: cycle)
 			setupContent()
 			return
 		}
@@ -126,7 +125,7 @@ class OffPeriodVC: UIViewController {
 			showDate = periodStartDate
 			partOfCycle = .offPeriod
 		}
-		self.calendarModel = OffPeriodModel(date: showDate, partOfCycle: partOfCycle)
+		self.calendarModel = OffPeriodModel(date: showDate, partOfCycle: partOfCycle, period: period, cycle: cycle)
 		setupContent()
 	}
 
@@ -155,13 +154,6 @@ class OffPeriodVC: UIViewController {
 				self.buttonTwo.isHidden = true
 				self.accentColor = UIColor(named: "mainColor")!
 				self.mainColor = .white
-			case .startDay:
-				self.descriptionText.text = "Period started?"
-				self.buttonOne.setTitle("Yes", for: .normal)
-				self.buttonTwo.setTitle("No", for: .normal)
-				self.buttonTwo.isHidden = false
-				self.accentColor = .white
-				self.mainColor = UIColor(named: "mainColor")!
 		}
 	}
 
@@ -227,18 +219,23 @@ class OffPeriodVC: UIViewController {
 				self.calendarModel?.partOfCycle = .period
 				self.calendarModel?.date = Date()
 			case .period:
+				guard let calendarModel = self.calendarModel else { return }
 				self.calendarModel?.partOfCycle = .offPeriod
+				self.calendarModel?.date = DateCalculatiorService.shared.getNextPriodDate(calendarModel.date, cycle: calendarModel.cycle)
 			case .delay:
 				self.calendarModel?.partOfCycle = .period
 				self.calendarModel?.date = Date()
 				UserProfileService.shared.setDelay(false)
 				// add alert
-			case .startDay:
-				self.calendarModel?.partOfCycle = .period
-				self.calendarModel?.date = Date()
 		}
-		self.setupContent()
-		self.view.layoutSubviews()
+		self.save() { [weak self] in
+			guard let self = self else { return }
+//			self.fetchData() {
+				self.setupContent()
+				self.view.layoutSubviews()
+//			}
+		}
+
 	}
 
 	@objc func buttonTwoAction() {
@@ -246,7 +243,7 @@ class OffPeriodVC: UIViewController {
 		switch partOfCycle {
 			case .offPeriod, .delay:
 				return
-			case .startDay, .period:
+			case .period:
 				UserProfileService.shared.setDelay(true)
 				self.calendarModel?.partOfCycle = .delay
 		}
@@ -256,7 +253,7 @@ class OffPeriodVC: UIViewController {
 
 	// MARK: CoreData Interactions
 
-	private func fetchData() {
+	private func fetchData(completion: @escaping () -> Void) {
 		PersistanceService.shared.fetchData { result in
 			switch result {
 				case .success(let date):
@@ -269,6 +266,7 @@ class OffPeriodVC: UIViewController {
 								cycle: Int(date[0].cycleLength),
 								period: Int(date[0].periodLength)
 							)
+							completion()
 						}
 					}
 				case .failure(let error):
@@ -277,17 +275,37 @@ class OffPeriodVC: UIViewController {
 		}
 	}
 
-	private func save(settingsModel: SettingsModel, completion: ()-> Void) {
+	private func save(completion: () -> Void) {
 		defer {
 			completion()
 		}
 
-		if self.datePersistance.isEmpty {
-			PersistanceService.shared.create(settingsModel) { settingsModel in
-				return
-			}
-		} else {
+		guard let calendarModel = self.calendarModel else { return }
+
+		if !self.datePersistance.isEmpty {
+			let settingsModel = SettingsModel(lastPeriodBeginDate: calendarModel.date, periodLength: calendarModel.period, cycleLength: calendarModel.cycle)
 			PersistanceService.shared.update(self.datePersistance[0], with: settingsModel)
 		}
+	}
+
+	// MARK: Alerts
+
+	private func startPeriodAlert(title: String, message: String, completion: @escaping () -> Void) {
+		// Create Alert
+		let dialogMessage = UIAlertController(title: title, message: message, preferredStyle: .alert)
+		// Create OK button with action handler
+		let ok = UIAlertAction(title: "OK", style: .destructive, handler: { (action) -> Void in
+			completion()
+		})
+		// Create Cancel button with action handlder
+		let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
+		}
+		ok.setValue(UIColor(named: "mainColor"), forKey: "titleTextColor")
+		cancel.setValue(UIColor(named: "mainColor"), forKey: "titleTextColor")
+		//Add OK and Cancel button to an Alert object
+		dialogMessage.addAction(ok)
+		dialogMessage.addAction(cancel)
+		// Present alert message to user
+		self.present(dialogMessage, animated: true, completion: nil)
 	}
 }

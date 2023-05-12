@@ -134,14 +134,10 @@ class UserSettingsVC: UIViewController {
 	}
 
 	@objc private func goBack() {
-//		// TODO: add alert that date will not be saved
-//		self.coordinator?.closeSettings()
-
 		self.showGoBackAlert()
 	}
 
 	@objc private func goBackSaving() {
-
 		guard let text = self.periodLengthView.valueLabel.text,
 			let periodLength = Int(text),
 			  let cycleText = self.cycleLengthView.valueLabel.text,
@@ -193,9 +189,7 @@ class UserSettingsVC: UIViewController {
 		}
 
 		if self.datePersistance.isEmpty {
-			PersistanceService.shared.create(settingsModel) { settingsModel in
-				return
-			}
+			PersistanceService.shared.create(settingsModel) { _ in }
 		} else {
 			PersistanceService.shared.update(self.datePersistance[0], with: settingsModel)
 		}
