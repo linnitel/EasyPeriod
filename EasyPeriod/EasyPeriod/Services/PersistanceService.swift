@@ -51,22 +51,22 @@ class PersistanceService {
 			completion(.failure(error))
 		}
 	}
-
-	func create(_ model: SettingsModel, completion: (DateSettings)-> Void) {
-		let dateSettings = DateSettings(context: viewContext)
-		dateSettings.lastPeriodDate = model.lastPeriodBeginDate
-		dateSettings.periodLength = Int32(model.periodLength)
-		dateSettings.cycleLength = Int32(model.cycleLength)
-		completion(dateSettings)
-		saveContext()
-	}
-
-	func update(_ dateSettings: DateSettings, with model: SettingsModel) {
-		dateSettings.lastPeriodDate = model.lastPeriodBeginDate
-		dateSettings.cycleLength = Int32(model.cycleLength)
-		dateSettings.periodLength = Int32(model.periodLength)
-		saveContext()
-	}
+//
+//	func create(_ model: SettingsModel, completion: (DateSettings)-> Void) {
+//		let dateSettings = DateSettings(context: viewContext)
+//		dateSettings.lastPeriodDate = model.lastPeriodBeginDate
+//		dateSettings.periodLength = Int32(model.periodLength)
+//		dateSettings.cycleLength = Int32(model.cycleLength)
+//		completion(dateSettings)
+//		saveContext()
+//	}
+//
+//	func update(_ dateSettings: DateSettings, with model: SettingsModel) {
+//		dateSettings.lastPeriodDate = model.lastPeriodBeginDate
+//		dateSettings.cycleLength = Int32(model.cycleLength)
+//		dateSettings.periodLength = Int32(model.periodLength)
+//		saveContext()
+//	}
 
 	func delete(_ dateSettings: DateSettings) {
 		viewContext.delete(dateSettings)

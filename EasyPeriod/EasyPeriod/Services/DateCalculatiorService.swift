@@ -51,6 +51,12 @@ class DateCalculatiorService {
 		Calendar.current.date(byAdding: .day, value: cycle, to: date)!
 	}
 
+	func calculateTimeInterval(to date: Date) -> TimeInterval {
+		let now = Date()
+		let dateBefore = Calendar.current.date(byAdding: .day, value: -1, to: date)!
+		return dateBefore.timeIntervalSinceReferenceDate - now.timeIntervalSinceReferenceDate + 12 * 360
+	}
+
 //	func calculateDate(_ date: Date, cycle: Int, period: Int, delay: Bool, isPeriod: Bool) -> Date {
 //		let now = Date()
 //		if delay || isPeriod {

@@ -25,20 +25,19 @@ class Coordinator {
 class AppCoordinator: Coordinator {
 	// TODO: add check for all fields are filled? with data
 	override func start() {
-		
-		let isAppAlreadyLaunchedOnce = UserProfileService.shared.isAppAlreadyLaunchedOnce()
-		if !isAppAlreadyLaunchedOnce {
+		let state = UserProfileService.shared.getStatus()
+		let settingsAreFilled = !(state == .notSet)
+		if settingsAreFilled {
+			let calendarVC = OffPeriodVC()
+			calendarVC.coordinator = self
+			self.router?.setViewControllers([calendarVC], animated: false)
+		} else {
 			let calendarVC = OffPeriodVC()
 			calendarVC.coordinator = self
 			let userSettingsVC = UserSettingsVC()
 			userSettingsVC.coordinator = self
 			userSettingsVC.isFirstLaunch = true
-			UserProfileService.shared.setDelay(false)
 			self.router?.setViewControllers([calendarVC, userSettingsVC], animated: false)
-		} else {
-			let calendarVC = OffPeriodVC()
-			calendarVC.coordinator = self
-			self.router?.setViewControllers([calendarVC], animated: false)
 		}
 	}
 

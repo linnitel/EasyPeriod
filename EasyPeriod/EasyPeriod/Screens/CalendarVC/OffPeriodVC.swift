@@ -10,15 +10,10 @@ import UIKit
 class OffPeriodVC: UIViewController {
 	
 	weak public var coordinator: AppCoordinator?
+	let notifications = Notifications()
 
 	private var datePersistance: [DateSettings] = []
-	private var delay: Bool {
-		UserProfileService.shared.getDelay()
-	}
 
-	private var isPeriod: Bool {
-		UserProfileService.shared.getIsPeriod()
-	}
 	private var calendarModel: OffPeriodModel?
 
 	private var accentColor: UIColor = UIColor(named: "mainColor")! {
@@ -66,6 +61,7 @@ class OffPeriodVC: UIViewController {
 		let label = UILabel()
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.textAlignment = .center
+		label.numberOfLines = 0
 		return label
 	}()
 
@@ -97,47 +93,26 @@ class OffPeriodVC: UIViewController {
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
-		self.fetchData() {}
-
-	}
-
-	private func calculateData(for date: Date, cycle: Int, period: Int) {
-
-		let periodStartDate = DateCalculatiorService.shared.calculateStartDate(date, cycle: cycle, period: period)
-		let periodEndDate = DateCalculatiorService.shared.calculateEndDate(periodStartDate, period: period)
-		var showDate: Date
-		var partOfCycle: OffPeriodModel.PartOfCycle
-
-		if delay {
-			showDate = Date()
-			partOfCycle = .delay
-			self.calendarModel = OffPeriodModel(date: showDate, partOfCycle: partOfCycle, period: period, cycle: cycle)
-			setupContent()
-			return
-		}
-
-		let isPeriodCheck = DateCalculatiorService.shared.isPeriod(startDate: periodStartDate, endDate: periodEndDate)
-		UserProfileService.shared.setIsPeriod(isPeriodCheck)
-		if isPeriodCheck {
-			partOfCycle = .period
-			showDate = Date()
-		} else {
-			showDate = periodStartDate
-			partOfCycle = .offPeriod
-		}
-		self.calendarModel = OffPeriodModel(date: showDate, partOfCycle: partOfCycle, period: period, cycle: cycle)
-		setupContent()
+		self.fetchData()
+		self.setupContent()
 	}
 
 	private func setupContent() {
 
 		guard let calendarModel = self.calendarModel else { return }
-		self.nextPeriodDate.text = DateCalculatiorService.shared.getDay(calendarModel.date)
-		self.nextPeriodMonthAndWeek.text = DateCalculatiorService.shared.getMonthAndWeek(calendarModel.date)
+		self.nextPeriodDate.text = DateCalculatiorService.shared.getDay(calendarModel.showDate)
+		self.nextPeriodMonthAndWeek.text = DateCalculatiorService.shared.getMonthAndWeek(calendarModel.showDate)
 		switch calendarModel.partOfCycle {
+			case .notSet:
+				self.descriptionText.text = "Please setup your period schadule in settings"
+				self.buttonTwo.isHidden = true
+				self.buttonOne.isHidden = true
+				self.accentColor = UIColor(named: "mainColor")!
+				self.mainColor = .white
 			case .offPeriod:
 				self.descriptionText.text = "Next period"
 				self.buttonOne.setTitle("Started", for: .normal)
+				self.buttonOne.isHidden = false
 				self.buttonTwo.isHidden = true
 				self.accentColor = UIColor(named: "mainColor")!
 				self.mainColor = .white
@@ -146,12 +121,14 @@ class OffPeriodVC: UIViewController {
 				self.buttonOne.setTitle("Period ended early", for: .normal)
 				self.buttonTwo.setTitle("Didn't start", for: .normal)
 				self.accentColor = .white
+				self.buttonOne.isHidden = false
 				self.buttonTwo.isHidden = false
 				self.mainColor = UIColor(named: "mainColor")!
 			case .delay:
 				self.descriptionText.text = "You have a delay"
 				self.buttonOne.setTitle("Have started!!", for: .normal)
 				self.buttonTwo.isHidden = true
+				self.buttonOne.isHidden = false
 				self.accentColor = UIColor(named: "mainColor")!
 				self.mainColor = .white
 		}
@@ -171,6 +148,8 @@ class OffPeriodVC: UIViewController {
 			self.nextPeriodMonthAndWeek.centerXAnchor.constraint(equalTo: self.nextPeriodDate.centerXAnchor),
 
 			self.descriptionText.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+			self.descriptionText.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
+			self.descriptionText.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
 			self.descriptionText.topAnchor.constraint(equalTo: self.shape.bottomAnchor, constant: 30),
 
 			self.buttonOne.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
@@ -213,83 +192,68 @@ class OffPeriodVC: UIViewController {
 	}
 
 	@objc func buttonOneAction() {
-		guard let partOfCycle = self.calendarModel?.partOfCycle  else { return }
-		switch partOfCycle {
-			case .offPeriod:
-				self.calendarModel?.partOfCycle = .period
-				self.calendarModel?.date = Date()
+		guard var calendarModel = self.calendarModel  else { return }
+		var nextDate: Date
+		switch calendarModel.partOfCycle {
+			case .notSet:
+				return
+			// period have started early
+			case .offPeriod, .delay:
+				calendarModel.partOfCycle = .period
+				let newDate = Date()
+				calendarModel.startDate = newDate
+				nextDate = DateCalculatiorService.shared.getNextPriodDate(newDate, cycle: calendarModel.cycle)
+			// period ended early
 			case .period:
-				guard let calendarModel = self.calendarModel else { return }
-				self.calendarModel?.partOfCycle = .offPeriod
-				self.calendarModel?.date = DateCalculatiorService.shared.getNextPriodDate(calendarModel.date, cycle: calendarModel.cycle)
-			case .delay:
-				self.calendarModel?.partOfCycle = .period
-				self.calendarModel?.date = Date()
-				UserProfileService.shared.setDelay(false)
-				// add alert
+				calendarModel.partOfCycle = .offPeriod
+				nextDate = DateCalculatiorService.shared.getNextPriodDate(calendarModel.startDate, cycle: calendarModel.cycle)
+				calendarModel.startDate = nextDate
 		}
-		self.save() { [weak self] in
-			guard let self = self else { return }
-//			self.fetchData() {
-				self.setupContent()
-				self.view.layoutSubviews()
-//			}
-		}
-
+		let timeInterval = DateCalculatiorService.shared.calculateTimeInterval(to: nextDate)
+		self.notifications.scheduleNotification(for: timeInterval)
+		self.calendarModel = calendarModel
+		UserProfileService.shared.setSettings(calendarModel)
+		self.setupContent()
 	}
 
 	@objc func buttonTwoAction() {
-		guard let partOfCycle = self.calendarModel?.partOfCycle  else { return }
-		switch partOfCycle {
-			case .offPeriod, .delay:
+		guard var calendarModel = self.calendarModel  else { return }
+		switch calendarModel.partOfCycle {
+			case .notSet, .offPeriod, .delay:
 				return
 			case .period:
-				UserProfileService.shared.setDelay(true)
-				self.calendarModel?.partOfCycle = .delay
+				calendarModel.partOfCycle = .delay
 		}
+		self.calendarModel = calendarModel
+		UserProfileService.shared.setSettings(calendarModel)
 		self.setupContent()
 		self.view.layoutIfNeeded()
 	}
 
-	// MARK: CoreData Interactions
+	// MARK: UserDefalts Interactions
+	private func fetchData() {
+		var calendarModel = UserProfileService.shared.getSettings()
+		print(calendarModel)
+		guard calendarModel.partOfCycle != .notSet else {
+			self.calendarModel = calendarModel
+			return
+		}
 
-	private func fetchData(completion: @escaping () -> Void) {
-		PersistanceService.shared.fetchData { result in
-			switch result {
-				case .success(let date):
-					DispatchQueue.main.async {
-						self.datePersistance = date
-						if !date.isEmpty,
-						   let lastPeriodDate = date[0].lastPeriodDate {
-							self.calculateData(
-								for: lastPeriodDate,
-								cycle: Int(date[0].cycleLength),
-								period: Int(date[0].periodLength)
-							)
-							completion()
-						}
-					}
-				case .failure(let error):
-					print(error.localizedDescription)
+		let periodStartDate = DateCalculatiorService.shared.calculateStartDate(calendarModel.startDate, cycle: calendarModel.cycle, period: calendarModel.period)
+		let periodEndDate = DateCalculatiorService.shared.calculateEndDate(periodStartDate, period: calendarModel.period)
+		if calendarModel.partOfCycle != .delay {
+			let isPeriodCheck = DateCalculatiorService.shared.isPeriod(startDate: periodStartDate, endDate: periodEndDate)
+			if isPeriodCheck {
+				calendarModel.partOfCycle = .period
+			} else {
+				calendarModel.partOfCycle = .offPeriod
 			}
 		}
-	}
-
-	private func save(completion: () -> Void) {
-		defer {
-			completion()
-		}
-
-		guard let calendarModel = self.calendarModel else { return }
-
-		if !self.datePersistance.isEmpty {
-			let settingsModel = SettingsModel(lastPeriodBeginDate: calendarModel.date, periodLength: calendarModel.period, cycleLength: calendarModel.cycle)
-			PersistanceService.shared.update(self.datePersistance[0], with: settingsModel)
-		}
+		self.calendarModel = calendarModel
+		UserProfileService.shared.setSettings(calendarModel)
 	}
 
 	// MARK: Alerts
-
 	private func startPeriodAlert(title: String, message: String, completion: @escaping () -> Void) {
 		// Create Alert
 		let dialogMessage = UIAlertController(title: title, message: message, preferredStyle: .alert)

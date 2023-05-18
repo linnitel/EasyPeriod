@@ -7,8 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A3D87102A123F960004053A /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3D870F2A123F960004053A /* Notifications.swift */; };
+		4A3D87742A14D7620004053A /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3D87172A1378050004053A /* WidgetKit.framework */; };
+		4A3D87752A14D7620004053A /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A3D87192A1378060004053A /* SwiftUI.framework */; };
+		4A3D87782A14D7620004053A /* PeriodWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3D87772A14D7620004053A /* PeriodWidgetBundle.swift */; };
+		4A3D877A2A14D7620004053A /* PeriodWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3D87792A14D7620004053A /* PeriodWidgetLiveActivity.swift */; };
+		4A3D877C2A14D7630004053A /* PeriodWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3D877B2A14D7620004053A /* PeriodWidget.swift */; };
+		4A3D877E2A14D7630004053A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A3D877D2A14D7630004053A /* Assets.xcassets */; };
+		4A3D87822A14D7630004053A /* PeriodWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4A3D87732A14D7620004053A /* PeriodWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4A3D87872A14D7790004053A /* DateFormatter+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4F523F29FBC878003638C5 /* DateFormatter+Extention.swift */; };
+		4A3D878B2A15134D0004053A /* UserProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B637929F7F0FF00997332 /* UserProfileService.swift */; };
+		4A3D878C2A1544820004053A /* OffPeriodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A77AC9D2A06841500A9E437 /* OffPeriodModel.swift */; };
 		4A4A06F829F937AE0050BAB4 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A06F629F937AE0050BAB4 /* DataModel.xcdatamodeld */; };
-		4A4A06FA29F96EC30050BAB4 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A06F929F96EC30050BAB4 /* SettingsModel.swift */; };
 		4A4A06FC29F980400050BAB4 /* PersistanceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A06FB29F980400050BAB4 /* PersistanceService.swift */; };
 		4A4F523D29FAD9C6003638C5 /* DateCalculatiorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4F523C29FAD9C6003638C5 /* DateCalculatiorService.swift */; };
 		4A4F524029FBC878003638C5 /* DateFormatter+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4F523F29FBC878003638C5 /* DateFormatter+Extention.swift */; };
@@ -19,7 +29,7 @@
 		4A6B636E29F6E32600997332 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A6B636C29F6E32600997332 /* LaunchScreen.storyboard */; };
 		4A6B637629F6E61700997332 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B637529F6E61700997332 /* Coordinator.swift */; };
 		4A6B637829F7E30900997332 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A6B637729F7E30900997332 /* Main.storyboard */; };
-		4A6B637A29F7F0FF00997332 /* UserSettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B637929F7F0FF00997332 /* UserSettingsService.swift */; };
+		4A6B637A29F7F0FF00997332 /* UserProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B637929F7F0FF00997332 /* UserProfileService.swift */; };
 		4A6B638529F80A6900997332 /* DropDownPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B638429F80A6900997332 /* DropDownPickerView.swift */; };
 		4A6D20342A0442A4009FD307 /* DropShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6D20332A0442A4009FD307 /* DropShapeView.swift */; };
 		4A77AC9F2A06841500A9E437 /* OffPeriodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A77AC9D2A06841500A9E437 /* OffPeriodModel.swift */; };
@@ -27,9 +37,42 @@
 		4ADC9B2F29FFBB550021F9BF /* DropDownDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC9B2E29FFBB550021F9BF /* DropDownDateView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		4A3D87802A14D7630004053A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4A6B635629F6E32500997332 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4A3D87722A14D7620004053A;
+			remoteInfo = PeriodWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4A3D872B2A1378070004053A /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4A3D87822A14D7630004053A /* PeriodWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		4A3D870E2A0E619C0004053A /* EasyPeriod.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EasyPeriod.entitlements; sourceTree = "<group>"; };
+		4A3D870F2A123F960004053A /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		4A3D87172A1378050004053A /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		4A3D87192A1378060004053A /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		4A3D87732A14D7620004053A /* PeriodWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PeriodWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A3D87772A14D7620004053A /* PeriodWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodWidgetBundle.swift; sourceTree = "<group>"; };
+		4A3D87792A14D7620004053A /* PeriodWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodWidgetLiveActivity.swift; sourceTree = "<group>"; };
+		4A3D877B2A14D7620004053A /* PeriodWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodWidget.swift; sourceTree = "<group>"; };
+		4A3D877D2A14D7630004053A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4A3D877F2A14D7630004053A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A4A06F729F937AE0050BAB4 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
-		4A4A06F929F96EC30050BAB4 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		4A4A06FB29F980400050BAB4 /* PersistanceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceService.swift; sourceTree = "<group>"; };
 		4A4F523C29FAD9C6003638C5 /* DateCalculatiorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCalculatiorService.swift; sourceTree = "<group>"; };
 		4A4F523F29FBC878003638C5 /* DateFormatter+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extention.swift"; sourceTree = "<group>"; };
@@ -42,7 +85,7 @@
 		4A6B636F29F6E32600997332 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A6B637529F6E61700997332 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		4A6B637729F7E30900997332 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		4A6B637929F7F0FF00997332 /* UserSettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsService.swift; sourceTree = "<group>"; };
+		4A6B637929F7F0FF00997332 /* UserProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileService.swift; sourceTree = "<group>"; };
 		4A6B638429F80A6900997332 /* DropDownPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownPickerView.swift; sourceTree = "<group>"; };
 		4A6D20332A0442A4009FD307 /* DropShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropShapeView.swift; sourceTree = "<group>"; };
 		4A77AC9D2A06841500A9E437 /* OffPeriodModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffPeriodModel.swift; sourceTree = "<group>"; };
@@ -51,6 +94,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4A3D87702A14D7620004053A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A3D87752A14D7620004053A /* SwiftUI.framework in Frameworks */,
+				4A3D87742A14D7620004053A /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4A6B635B29F6E32500997332 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -61,6 +113,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A3D87162A1378050004053A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4A3D87172A1378050004053A /* WidgetKit.framework */,
+				4A3D87192A1378060004053A /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4A3D87762A14D7620004053A /* PeriodWidget */ = {
+			isa = PBXGroup;
+			children = (
+				4A3D87772A14D7620004053A /* PeriodWidgetBundle.swift */,
+				4A3D87792A14D7620004053A /* PeriodWidgetLiveActivity.swift */,
+				4A3D877B2A14D7620004053A /* PeriodWidget.swift */,
+				4A3D877D2A14D7630004053A /* Assets.xcassets */,
+				4A3D877F2A14D7630004053A /* Info.plist */,
+			);
+			path = PeriodWidget;
+			sourceTree = "<group>";
+		};
 		4A4F523E29FBC862003638C5 /* Extentions */ = {
 			isa = PBXGroup;
 			children = (
@@ -73,6 +146,8 @@
 			isa = PBXGroup;
 			children = (
 				4A6B636029F6E32500997332 /* EasyPeriod */,
+				4A3D87762A14D7620004053A /* PeriodWidget */,
+				4A3D87162A1378050004053A /* Frameworks */,
 				4A6B635F29F6E32500997332 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -81,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				4A6B635E29F6E32500997332 /* EasyPeriod.app */,
+				4A3D87732A14D7620004053A /* PeriodWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -88,6 +164,7 @@
 		4A6B636029F6E32500997332 /* EasyPeriod */ = {
 			isa = PBXGroup;
 			children = (
+				4A3D870E2A0E619C0004053A /* EasyPeriod.entitlements */,
 				4A4F523E29FBC862003638C5 /* Extentions */,
 				4A4A06F629F937AE0050BAB4 /* DataModel.xcdatamodeld */,
 				4A6B638329F80A4400997332 /* Views */,
@@ -104,6 +181,7 @@
 		4A6B637D29F7F45900997332 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				4A3D870F2A123F960004053A /* Notifications.swift */,
 				4A6B636129F6E32500997332 /* AppDelegate.swift */,
 				4A6B636329F6E32500997332 /* SceneDelegate.swift */,
 				4A6B637729F7E30900997332 /* Main.storyboard */,
@@ -141,7 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				4A4F523C29FAD9C6003638C5 /* DateCalculatiorService.swift */,
-				4A6B637929F7F0FF00997332 /* UserSettingsService.swift */,
+				4A6B637929F7F0FF00997332 /* UserProfileService.swift */,
 				4A4A06FB29F980400050BAB4 /* PersistanceService.swift */,
 			);
 			path = Services;
@@ -161,7 +239,6 @@
 			isa = PBXGroup;
 			children = (
 				4A6B636529F6E32500997332 /* UserSettingsVC.swift */,
-				4A4A06F929F96EC30050BAB4 /* SettingsModel.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -178,6 +255,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		4A3D87722A14D7620004053A /* PeriodWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A3D87832A14D7630004053A /* Build configuration list for PBXNativeTarget "PeriodWidgetExtension" */;
+			buildPhases = (
+				4A3D876F2A14D7620004053A /* Sources */,
+				4A3D87702A14D7620004053A /* Frameworks */,
+				4A3D87712A14D7620004053A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PeriodWidgetExtension;
+			productName = PeriodWidgetExtension;
+			productReference = 4A3D87732A14D7620004053A /* PeriodWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		4A6B635D29F6E32500997332 /* EasyPeriod */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4A6B637229F6E32600997332 /* Build configuration list for PBXNativeTarget "EasyPeriod" */;
@@ -185,10 +279,12 @@
 				4A6B635A29F6E32500997332 /* Sources */,
 				4A6B635B29F6E32500997332 /* Frameworks */,
 				4A6B635C29F6E32500997332 /* Resources */,
+				4A3D872B2A1378070004053A /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4A3D87812A14D7630004053A /* PBXTargetDependency */,
 			);
 			name = EasyPeriod;
 			productName = EasyPeriod;
@@ -205,6 +301,9 @@
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					4A3D87722A14D7620004053A = {
+						CreatedOnToolsVersion = 14.3;
+					};
 					4A6B635D29F6E32500997332 = {
 						CreatedOnToolsVersion = 14.3;
 					};
@@ -224,11 +323,20 @@
 			projectRoot = "";
 			targets = (
 				4A6B635D29F6E32500997332 /* EasyPeriod */,
+				4A3D87722A14D7620004053A /* PeriodWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4A3D87712A14D7620004053A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A3D877E2A14D7630004053A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4A6B635C29F6E32500997332 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -242,6 +350,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4A3D876F2A14D7620004053A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A3D87872A14D7790004053A /* DateFormatter+Extention.swift in Sources */,
+				4A3D87782A14D7620004053A /* PeriodWidgetBundle.swift in Sources */,
+				4A3D877A2A14D7620004053A /* PeriodWidgetLiveActivity.swift in Sources */,
+				4A3D877C2A14D7630004053A /* PeriodWidget.swift in Sources */,
+				4A3D878C2A1544820004053A /* OffPeriodModel.swift in Sources */,
+				4A3D878B2A15134D0004053A /* UserProfileService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4A6B635A29F6E32500997332 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -254,17 +375,25 @@
 				4A4F524029FBC878003638C5 /* DateFormatter+Extention.swift in Sources */,
 				4ADC9B2F29FFBB550021F9BF /* DropDownDateView.swift in Sources */,
 				4A4A06FC29F980400050BAB4 /* PersistanceService.swift in Sources */,
+				4A3D87102A123F960004053A /* Notifications.swift in Sources */,
 				4A77AC9F2A06841500A9E437 /* OffPeriodModel.swift in Sources */,
 				4A6B636429F6E32500997332 /* SceneDelegate.swift in Sources */,
-				4A4A06FA29F96EC30050BAB4 /* SettingsModel.swift in Sources */,
 				4A6D20342A0442A4009FD307 /* DropShapeView.swift in Sources */,
 				4A4A06F829F937AE0050BAB4 /* DataModel.xcdatamodeld in Sources */,
 				4A6B638529F80A6900997332 /* DropDownPickerView.swift in Sources */,
-				4A6B637A29F7F0FF00997332 /* UserSettingsService.swift in Sources */,
+				4A6B637A29F7F0FF00997332 /* UserProfileService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4A3D87812A14D7630004053A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4A3D87722A14D7620004053A /* PeriodWidgetExtension */;
+			targetProxy = 4A3D87802A14D7630004053A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		4A6B636C29F6E32600997332 /* LaunchScreen.storyboard */ = {
@@ -278,6 +407,60 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4A3D87842A14D7630004053A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 26L85DSMMD;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PeriodWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PeriodWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = linnitel.EasyPeriod.PeriodWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4A3D87852A14D7630004053A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 26L85DSMMD;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PeriodWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PeriodWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = linnitel.EasyPeriod.PeriodWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		4A6B637029F6E32600997332 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -395,8 +578,10 @@
 		4A6B637329F6E32600997332 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = EasyPeriod/EasyPeriod.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 26L85DSMMD;
@@ -424,8 +609,10 @@
 		4A6B637429F6E32600997332 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = EasyPeriod/EasyPeriod.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 26L85DSMMD;
@@ -453,6 +640,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4A3D87832A14D7630004053A /* Build configuration list for PBXNativeTarget "PeriodWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A3D87842A14D7630004053A /* Debug */,
+				4A3D87852A14D7630004053A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4A6B635929F6E32500997332 /* Build configuration list for PBXProject "EasyPeriod" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

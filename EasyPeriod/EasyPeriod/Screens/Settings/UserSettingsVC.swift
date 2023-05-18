@@ -12,10 +12,11 @@ import CoreData
 class UserSettingsVC: UIViewController {
 
 	weak public var coordinator: AppCoordinator?
+	let notifications = Notifications()
+
 	public var isFirstLaunch: Bool?
 
-	private var datePersistance: [DateSettings] = []
-	private var settingsModel: SettingsModel?
+	private var calendarModel: OffPeriodModel?
 
 	private lazy var periodLengthView: DropDownPickerView = {
 		let view = DropDownPickerView()
@@ -141,67 +142,60 @@ class UserSettingsVC: UIViewController {
 		guard let text = self.periodLengthView.valueLabel.text,
 			let periodLength = Int(text),
 			  let cycleText = self.cycleLengthView.valueLabel.text,
-			  let cycleLength = Int(cycleText) else {
+			  let cycleLength = Int(cycleText),
+			  let dateText = self.previousDateView.valueLabel.text,
+			  !dateText.isEmpty else {
 			self.showFillingAllFieldsAlert()
 			return
 			  }
-		let settingsModel = SettingsModel(
-			lastPeriodBeginDate: self.previousDateView.datePicker.date,
-			periodLength: periodLength,
-			cycleLength: cycleLength)
-		self.save(settingsModel: settingsModel) {
-			print(settingsModel)
-			self.coordinator?.closeSettings()
+
+		guard var model = self.calendarModel else { return }
+
+		var periodStartDate = DateCalculatiorService.shared.calculateStartDate(
+			self.previousDateView.datePicker.date,
+			cycle: cycleLength,
+			period: periodLength
+		)
+		model.startDate = periodStartDate
+		model.cycle = cycleLength
+		model.period = periodLength
+		if model.partOfCycle == .notSet {
+			model.partOfCycle = .offPeriod
 		}
+		UserProfileService.shared.setSettings(model)
+
+		let now = Date()
+		if periodStartDate <= now {
+			periodStartDate = DateCalculatiorService.shared.getNextPriodDate(periodStartDate, cycle: cycleLength)
+		}
+		let timeInterval = DateCalculatiorService.shared.calculateTimeInterval(to: periodStartDate)
+		self.notifications.scheduleNotification(for: timeInterval)
+
+		self.coordinator?.closeSettings()
 	}
 
-	// MARK: CoreData Interactions
-
+	// MARK: UserDefalts Interactions
 	private func fetchData() {
-		PersistanceService.shared.fetchData { result in
-			switch result {
-				case .success(let date):
-					DispatchQueue.main.async {
-						self.datePersistance = date
-						if !date.isEmpty,
-						   let lastPeriodDate = date[0].lastPeriodDate {
-							self.settingsModel = SettingsModel(
-								lastPeriodBeginDate: lastPeriodDate,
-								periodLength: Int(date[0].periodLength),
-								cycleLength: Int(date[0].cycleLength)
-							)
-							self.cycleLengthView.valueLabel.text = String(self.settingsModel!.cycleLength)
-							self.periodLengthView.valueLabel.text = String(self.settingsModel!.periodLength)
-							self.previousDateView.datePicker.date = self.settingsModel!.lastPeriodBeginDate
-							let date = DateFormatter(dateFormat: "d.MM.yyyy", calendar: Calendar.current).string(from: self.settingsModel!.lastPeriodBeginDate)
-							self.previousDateView.valueLabel.text = date
-						}
-					}
-				case .failure(let error):
-					print(error.localizedDescription)
-			}
+		let settings = UserProfileService.shared.getSettings()
+		guard settings.partOfCycle != .notSet else {
+			self.calendarModel = settings
+			return
 		}
-	}
-
-	private func save(settingsModel: SettingsModel, completion: ()-> Void) {
-		defer {
-			completion()
-		}
-
-		if self.datePersistance.isEmpty {
-			PersistanceService.shared.create(settingsModel) { _ in }
-		} else {
-			PersistanceService.shared.update(self.datePersistance[0], with: settingsModel)
-		}
+		self.cycleLengthView.valueLabel.text = String(settings.cycle)
+		self.periodLengthView.valueLabel.text = String(settings.period)
+		self.previousDateView.datePicker.date = settings.startDate
+		let date = DateFormatter(dateFormat: "d.MM.yyyy", calendar: Calendar.current).string(from: settings.startDate)
+		self.previousDateView.valueLabel.text = date
+		self.calendarModel = settings
 	}
 
 	// MARK: Alerts
-
 	private func showGoBackAlert() {
 		// Create Alert
 		let dialogMessage = UIAlertController(title: "Close screen", message: "Are you sure you want to close settings, the data will not be saved?", preferredStyle: .alert)
 		// Create OK button with action handler
 		let ok = UIAlertAction(title: "OK", style: .destructive, handler: { (action) -> Void in
+
 			self.coordinator?.closeSettings()
 		})
 		// Create Cancel button with action handlder

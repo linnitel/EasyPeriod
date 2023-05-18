@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DropShapeView: UIView {
+final class DropShapeView: UIView {
 	var dropColor: UIColor = UIColor(named: "mainColor") ?? UIColor.systemPink {
 		didSet {
 			self.setNeedsLayout()
