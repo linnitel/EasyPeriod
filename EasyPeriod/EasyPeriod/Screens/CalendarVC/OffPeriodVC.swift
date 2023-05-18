@@ -12,8 +12,6 @@ class OffPeriodVC: UIViewController {
 	weak public var coordinator: AppCoordinator?
 	let notifications = Notifications()
 
-	private var datePersistance: [DateSettings] = []
-
 	private var calendarModel: OffPeriodModel?
 
 	private var accentColor: UIColor = UIColor(named: "mainColor")! {
@@ -203,6 +201,7 @@ class OffPeriodVC: UIViewController {
 				let newDate = Date()
 				calendarModel.startDate = newDate
 				nextDate = DateCalculatiorService.shared.getNextPriodDate(newDate, cycle: calendarModel.cycle)
+
 			// period ended early
 			case .period:
 				calendarModel.partOfCycle = .offPeriod
