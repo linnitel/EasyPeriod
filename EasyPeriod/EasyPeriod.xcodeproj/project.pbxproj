@@ -18,6 +18,7 @@
 		4A3D87872A14D7790004053A /* DateFormatter+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4F523F29FBC878003638C5 /* DateFormatter+Extention.swift */; };
 		4A3D878B2A15134D0004053A /* UserProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B637929F7F0FF00997332 /* UserProfileService.swift */; };
 		4A3D878C2A1544820004053A /* OffPeriodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A77AC9D2A06841500A9E437 /* OffPeriodModel.swift */; };
+		4A3D878E2A1622C20004053A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A3D878D2A1622C20004053A /* Main.storyboard */; };
 		4A4A06F829F937AE0050BAB4 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A06F629F937AE0050BAB4 /* DataModel.xcdatamodeld */; };
 		4A4A06FC29F980400050BAB4 /* PersistanceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4A06FB29F980400050BAB4 /* PersistanceService.swift */; };
 		4A4F523D29FAD9C6003638C5 /* DateCalculatiorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4F523C29FAD9C6003638C5 /* DateCalculatiorService.swift */; };
@@ -28,7 +29,6 @@
 		4A6B636B29F6E32600997332 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A6B636A29F6E32600997332 /* Assets.xcassets */; };
 		4A6B636E29F6E32600997332 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A6B636C29F6E32600997332 /* LaunchScreen.storyboard */; };
 		4A6B637629F6E61700997332 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B637529F6E61700997332 /* Coordinator.swift */; };
-		4A6B637829F7E30900997332 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A6B637729F7E30900997332 /* Main.storyboard */; };
 		4A6B637A29F7F0FF00997332 /* UserProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B637929F7F0FF00997332 /* UserProfileService.swift */; };
 		4A6B638529F80A6900997332 /* DropDownPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B638429F80A6900997332 /* DropDownPickerView.swift */; };
 		4A6D20342A0442A4009FD307 /* DropShapeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6D20332A0442A4009FD307 /* DropShapeView.swift */; };
@@ -72,6 +72,7 @@
 		4A3D877B2A14D7620004053A /* PeriodWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodWidget.swift; sourceTree = "<group>"; };
 		4A3D877D2A14D7630004053A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A3D877F2A14D7630004053A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A3D878D2A1622C20004053A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		4A4A06F729F937AE0050BAB4 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		4A4A06FB29F980400050BAB4 /* PersistanceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceService.swift; sourceTree = "<group>"; };
 		4A4F523C29FAD9C6003638C5 /* DateCalculatiorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCalculatiorService.swift; sourceTree = "<group>"; };
@@ -84,7 +85,6 @@
 		4A6B636D29F6E32600997332 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A6B636F29F6E32600997332 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A6B637529F6E61700997332 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		4A6B637729F7E30900997332 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		4A6B637929F7F0FF00997332 /* UserProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileService.swift; sourceTree = "<group>"; };
 		4A6B638429F80A6900997332 /* DropDownPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownPickerView.swift; sourceTree = "<group>"; };
 		4A6D20332A0442A4009FD307 /* DropShapeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropShapeView.swift; sourceTree = "<group>"; };
@@ -184,7 +184,7 @@
 				4A3D870F2A123F960004053A /* Notifications.swift */,
 				4A6B636129F6E32500997332 /* AppDelegate.swift */,
 				4A6B636329F6E32500997332 /* SceneDelegate.swift */,
-				4A6B637729F7E30900997332 /* Main.storyboard */,
+				4A3D878D2A1622C20004053A /* Main.storyboard */,
 				4A6B636C29F6E32600997332 /* LaunchScreen.storyboard */,
 			);
 			path = Main;
@@ -341,7 +341,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A6B637829F7E30900997332 /* Main.storyboard in Resources */,
+				4A3D878E2A1622C20004053A /* Main.storyboard in Resources */,
 				4A6B636E29F6E32600997332 /* LaunchScreen.storyboard in Resources */,
 				4A6B636B29F6E32600997332 /* Assets.xcassets in Resources */,
 			);
