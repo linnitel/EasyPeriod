@@ -11,7 +11,8 @@ import UIKit
 struct UserProfileService {
 	static let shared = UserProfileService()
 
-	let defaults = UserDefaults.standard
+//	let defaults = UserDefaults.standard
+	let defaults = UserDefaults(suiteName: "group.easyPeriod.linnitel")!
 
 	private init() {}
 

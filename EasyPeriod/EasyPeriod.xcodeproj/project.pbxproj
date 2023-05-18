@@ -73,6 +73,7 @@
 		4A3D877D2A14D7630004053A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A3D877F2A14D7630004053A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A3D878D2A1622C20004053A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		4A3D878F2A16277E0004053A /* PeriodWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PeriodWidgetExtension.entitlements; sourceTree = "<group>"; };
 		4A4A06F729F937AE0050BAB4 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		4A4A06FB29F980400050BAB4 /* PersistanceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceService.swift; sourceTree = "<group>"; };
 		4A4F523C29FAD9C6003638C5 /* DateCalculatiorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCalculatiorService.swift; sourceTree = "<group>"; };
@@ -125,8 +126,8 @@
 		4A3D87762A14D7620004053A /* PeriodWidget */ = {
 			isa = PBXGroup;
 			children = (
-				4A3D87772A14D7620004053A /* PeriodWidgetBundle.swift */,
 				4A3D87792A14D7620004053A /* PeriodWidgetLiveActivity.swift */,
+				4A3D87772A14D7620004053A /* PeriodWidgetBundle.swift */,
 				4A3D877B2A14D7620004053A /* PeriodWidget.swift */,
 				4A3D877D2A14D7630004053A /* Assets.xcassets */,
 				4A3D877F2A14D7630004053A /* Info.plist */,
@@ -145,6 +146,7 @@
 		4A6B635529F6E32500997332 = {
 			isa = PBXGroup;
 			children = (
+				4A3D878F2A16277E0004053A /* PeriodWidgetExtension.entitlements */,
 				4A6B636029F6E32500997332 /* EasyPeriod */,
 				4A3D87762A14D7620004053A /* PeriodWidget */,
 				4A3D87162A1378050004053A /* Frameworks */,
@@ -412,6 +414,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = PeriodWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 26L85DSMMD;
@@ -439,6 +442,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = PeriodWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 26L85DSMMD;

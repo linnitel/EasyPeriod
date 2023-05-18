@@ -12,6 +12,6 @@ import SwiftUI
 struct PeriodWidgetBundle: WidgetBundle {
     var body: some Widget {
         PeriodWidget()
-        PeriodWidgetLiveActivity()
+//        PeriodWidgetLiveActivity()
     }
 }
