@@ -28,11 +28,11 @@ class AppCoordinator: Coordinator {
 		let state = UserProfileService.shared.getStatus()
 		let settingsAreFilled = !(state == .notSet)
 		if settingsAreFilled {
-			let calendarVC = OffPeriodVC()
+			let calendarVC = CalendarVC()
 			calendarVC.coordinator = self
 			self.router?.setViewControllers([calendarVC], animated: false)
 		} else {
-			let calendarVC = OffPeriodVC()
+			let calendarVC = CalendarVC()
 			calendarVC.coordinator = self
 			let userSettingsVC = UserSettingsVC()
 			userSettingsVC.coordinator = self
@@ -49,7 +49,7 @@ class AppCoordinator: Coordinator {
 	}
 
 	func openCalendar() {
-		let calendarVC = OffPeriodVC()
+		let calendarVC = CalendarVC()
 		calendarVC.coordinator = self
 		self.router?.pushViewController(calendarVC, animated: true)
 	}

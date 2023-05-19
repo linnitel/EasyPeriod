@@ -1,0 +1,21 @@
+"CalendarVC.descriptionText.notSet" = "Please setup your period schadule in settings";
+"CalendarVC.descriptionText.offPeriod" = "Next period";
+"CalendarVC.descriptionText.period" = "Period is in progress";
+"CalendarVC.descriptionText.delay" = "You have a delay";
+"CalendarVC.buttonOne.offPeriod" = "Started";
+"CalendarVC.buttonOne.period" = "Period ended early";
+"CalendarVC.buttonTwo.period" = "Didn't start";
+"CalendarVC.buttonOne.delay" = "Have started!!";
+"UserSettingsVC.periodLengthView.text" = "Period Length (In days): ";
+"UserSettingsVC.cycleLengthView.text" = "Cycle length (In days): ";
+"UserSettingsVC.previousDateView.text" = "Last period Date: ";
+"UserSettingsVC.buttonCalculate" = "Calculate";
+"UserSettingsVC.NavigationBar.title" = "Settings";
+"UserSettingsVC.GoBackAlert.title" = "Close screen";
+"UserSettingsVC.GoBackAlert.message" = "Are you sure you want to close settings, the data will not be saved?";
+"UserSettingsVC.GoBackAlert.ok" = "OK";
+"UserSettingsVC.GoBackAlert.cancel" = "Cancel";
+"UserSettingsVC.FillingAllFieldsAlert.title" = "Fill in Settings";
+"UserSettingsVC.FillingAllFieldsAlert.message" = "Please fill all the fields with data to procede to the next screen.";
+"UserSettingsVC.FillingAllFieldsAlert.ok" = "OK";
+

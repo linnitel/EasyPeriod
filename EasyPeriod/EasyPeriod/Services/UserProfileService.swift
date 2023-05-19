@@ -16,12 +16,12 @@ struct UserProfileService {
 
 	private init() {}
 
-	func setStatus(_ status: OffPeriodModel.PartOfCycle) {
+	func setStatus(_ status: CalendarModel.PartOfCycle) {
 		defaults.set(status.rawValue, forKey: "periodStatus")
 	}
-	func getStatus() -> OffPeriodModel.PartOfCycle {
+	func getStatus() -> CalendarModel.PartOfCycle {
 		let rawValue = defaults.integer(forKey: "periodStatus")
-		let status = OffPeriodModel.PartOfCycle(rawValue: rawValue) ?? .offPeriod
+		let status = CalendarModel.PartOfCycle(rawValue: rawValue) ?? .offPeriod
 		return status
 	}
 
@@ -46,19 +46,19 @@ struct UserProfileService {
 		defaults.integer(forKey: "period")
 	}
 
-	func setSettings(_ settings: OffPeriodModel) {
+	func setSettings(_ settings: CalendarModel) {
 		self.setStatus(settings.partOfCycle)
 		self.setStartDate(settings.startDate)
 		self.setCycle(settings.cycle)
 		self.setPeriod(settings.period)
 	}
-	func getSettings() -> OffPeriodModel {
+	func getSettings() -> CalendarModel {
 		let startDate = self.getStartDate()
 		let status = self.getStatus()
 		let period = self.getPeriod()
 		let cycle = self.getCycle()
 
-		return OffPeriodModel(
+		return CalendarModel(
 			startDate: startDate,
 			partOfCycle: status,
 			period: period,

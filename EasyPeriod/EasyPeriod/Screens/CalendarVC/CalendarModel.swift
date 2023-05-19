@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct OffPeriodModel {
+struct CalendarModel {
 	var startDate: Date
 
 	var endDate: Date {

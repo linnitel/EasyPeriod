@@ -46,7 +46,7 @@ struct SimpleEntry: TimelineEntry {
 		self.imageName = imageName
 	}
 
-	init(settings: OffPeriodModel) {
+	init(settings: CalendarModel) {
 		self.date = settings.showDate
 		switch settings.partOfCycle {
 			case .notSet, .offPeriod, .delay:

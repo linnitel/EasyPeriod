@@ -16,12 +16,12 @@ class UserSettingsVC: UIViewController {
 
 	public var isFirstLaunch: Bool?
 
-	private var calendarModel: OffPeriodModel?
+	private var calendarModel: CalendarModel?
 
 	private lazy var periodLengthView: DropDownPickerView = {
 		let view = DropDownPickerView()
 		view.translatesAutoresizingMaskIntoConstraints = false
-		view.labelTitle.text = "Period Length (In days): "
+		view.labelTitle.text = "UserSettingsVC.periodLengthView.text".localized()
 		view.order = .isFirst
 		let arrayInt = Array<Int>(1...10)
 		var arrayString = [String]()
@@ -37,7 +37,7 @@ class UserSettingsVC: UIViewController {
 	private lazy var cycleLengthView: DropDownPickerView = {
 		let view = DropDownPickerView()
 		view.translatesAutoresizingMaskIntoConstraints = false
-		view.labelTitle.text = "Cycle length (In days): "
+		view.labelTitle.text = "UserSettingsVC.cycleLengthView.text".localized()
 		view.order = .middle
 //		let arrayInt = Array<Int>(21...40)
 //		var arrayString = [String]()
@@ -56,7 +56,7 @@ class UserSettingsVC: UIViewController {
 	private lazy var previousDateView: DropDownDateView = {
 		let view = DropDownDateView()
 		view.translatesAutoresizingMaskIntoConstraints = false
-		view.labelTitle.text = "Last period Date: "
+		view.labelTitle.text = "UserSettingsVC.previousDateView.text".localized()
 		view.isOpen = false
 		view.order = .isLast
 		let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.previousDateAction))
@@ -68,7 +68,7 @@ class UserSettingsVC: UIViewController {
 		let button = UIButton()
 		button.translatesAutoresizingMaskIntoConstraints = false
 		button.backgroundColor = .white
-		button.setTitle("Calculate", for: .normal)
+		button.setTitle("UserSettingsVC.buttonCalculate".localized(), for: .normal)
 		button.addTarget(self, action: #selector(self.goBackSaving), for: .touchUpInside)
 		button.layer.cornerRadius = 28
 		button.setTitleColor(UIColor(named: "mainColor"), for: .normal)
@@ -114,7 +114,7 @@ class UserSettingsVC: UIViewController {
 	}
 
 	private func setupNavigationBar() {
-		self.title = "Settings"
+		self.title = "UserSettingsVC.NavigationBar.title".localized()
 		self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "mainColor") ?? .black]
 		if let isFirstLaunch = self.isFirstLaunch,
 		   !isFirstLaunch {
@@ -192,14 +192,14 @@ class UserSettingsVC: UIViewController {
 	// MARK: Alerts
 	private func showGoBackAlert() {
 		// Create Alert
-		let dialogMessage = UIAlertController(title: "Close screen", message: "Are you sure you want to close settings, the data will not be saved?", preferredStyle: .alert)
+		let dialogMessage = UIAlertController(title: "UserSettingsVC.GoBackAlert.title".localized(), message: "UserSettingsVC.GoBackAlert.message".localized(), preferredStyle: .alert)
 		// Create OK button with action handler
-		let ok = UIAlertAction(title: "OK", style: .destructive, handler: { (action) -> Void in
+		let ok = UIAlertAction(title: "UserSettingsVC.GoBackAlert.ok".localized(), style: .destructive, handler: { (action) -> Void in
 
 			self.coordinator?.closeSettings()
 		})
 		// Create Cancel button with action handlder
-		let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
+		let cancel = UIAlertAction(title: "UserSettingsVC.GoBackAlert.cancel".localized(), style: .cancel) { (action) -> Void in
 		}
 		ok.setValue(UIColor(named: "mainColor"), forKey: "titleTextColor")
 		cancel.setValue(UIColor(named: "mainColor"), forKey: "titleTextColor")
@@ -212,9 +212,9 @@ class UserSettingsVC: UIViewController {
 
 	private func showFillingAllFieldsAlert() {
 		// Create Alert
-		let dialogMessage = UIAlertController(title: "Fill in Settings", message: "Please fill all the fields with data to procede to the next screen.", preferredStyle: .alert)
+		let dialogMessage = UIAlertController(title: "UserSettingsVC.FillingAllFieldsAlert.title".localized(), message: "UserSettingsVC.FillingAllFieldsAlert.message".localized(), preferredStyle: .alert)
 		// Create OK button with action handler
-		let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+		let ok = UIAlertAction(title: "UserSettingsVC.FillingAllFieldsAlert.ok".localized(), style: .default, handler: { (action) -> Void in
 		})
 		ok.setValue(UIColor(named: "mainColor"), forKey: "titleTextColor")
 		//Add OK and Cancel button to an Alert object

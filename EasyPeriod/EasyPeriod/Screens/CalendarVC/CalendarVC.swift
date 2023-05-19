@@ -1,5 +1,5 @@
 //
-//  OffPeriodVC.swift
+//  CalendarVC.swift
 //  EasyPeriod
 //
 //  Created by Julia Martcenko on 25/04/2023.
@@ -7,12 +7,12 @@
 
 import UIKit
 
-class OffPeriodVC: UIViewController {
+class CalendarVC: UIViewController {
 	
 	weak public var coordinator: AppCoordinator?
 	let notifications = Notifications()
 
-	private var calendarModel: OffPeriodModel?
+	private var calendarModel: CalendarModel?
 
 	private var accentColor: UIColor = UIColor(named: "mainColor")! {
 		didSet {
@@ -100,35 +100,37 @@ class OffPeriodVC: UIViewController {
 		guard let calendarModel = self.calendarModel else { return }
 		self.nextPeriodDate.text = DateCalculatiorService.shared.getDay(calendarModel.showDate)
 		self.nextPeriodMonthAndWeek.text = DateCalculatiorService.shared.getMonthAndWeek(calendarModel.showDate)
-		switch calendarModel.partOfCycle {
-			case .notSet:
-				self.descriptionText.text = "Please setup your period schadule in settings"
-				self.buttonTwo.isHidden = true
-				self.buttonOne.isHidden = true
-				self.accentColor = UIColor(named: "mainColor")!
-				self.mainColor = .white
-			case .offPeriod:
-				self.descriptionText.text = "Next period"
-				self.buttonOne.setTitle("Started", for: .normal)
-				self.buttonOne.isHidden = false
-				self.buttonTwo.isHidden = true
-				self.accentColor = UIColor(named: "mainColor")!
-				self.mainColor = .white
-			case .period:
-				self.descriptionText.text = "Period is in progress"
-				self.buttonOne.setTitle("Period ended early", for: .normal)
-				self.buttonTwo.setTitle("Didn't start", for: .normal)
-				self.accentColor = .white
-				self.buttonOne.isHidden = false
-				self.buttonTwo.isHidden = false
-				self.mainColor = UIColor(named: "mainColor")!
-			case .delay:
-				self.descriptionText.text = "You have a delay"
-				self.buttonOne.setTitle("Have started!!", for: .normal)
-				self.buttonTwo.isHidden = true
-				self.buttonOne.isHidden = false
-				self.accentColor = UIColor(named: "mainColor")!
-				self.mainColor = .white
+		UIView.animate(withDuration: 1.5, delay: 0.0, usingSpringWithDamping: 0.3, initialSpringVelocity: 1, options: UIView.AnimationOptions.curveEaseIn) {
+			switch calendarModel.partOfCycle {
+				case .notSet:
+					self.descriptionText.text = "CalendarVC.descriptionText.notSet".localized()
+					self.buttonTwo.isHidden = true
+					self.buttonOne.isHidden = true
+					self.accentColor = UIColor(named: "mainColor")!
+					self.mainColor = .white
+				case .offPeriod:
+					self.descriptionText.text = "CalendarVC.descriptionText.offPeriod".localized()
+					self.buttonOne.setTitle("CalendarVC.buttonOne.offPeriod".localized(), for: .normal)
+					self.buttonOne.isHidden = false
+					self.buttonTwo.isHidden = true
+					self.accentColor = UIColor(named: "mainColor")!
+					self.mainColor = .white
+				case .period:
+					self.descriptionText.text = "CalendarVC.descriptionText.period".localized()
+					self.buttonOne.setTitle("CalendarVC.buttonOne.period".localized(), for: .normal)
+					self.buttonTwo.setTitle("CalendarVC.buttonTwo.period".localized(), for: .normal)
+					self.accentColor = .white
+					self.buttonOne.isHidden = false
+					self.buttonTwo.isHidden = false
+					self.mainColor = UIColor(named: "mainColor")!
+				case .delay:
+					self.descriptionText.text = "CalendarVC.descriptionText.delay".localized()
+					self.buttonOne.setTitle("CalendarVC.buttonOne.delay".localized(), for: .normal)
+					self.buttonTwo.isHidden = true
+					self.buttonOne.isHidden = false
+					self.accentColor = UIColor(named: "mainColor")!
+					self.mainColor = .white
+			}
 		}
 	}
 
