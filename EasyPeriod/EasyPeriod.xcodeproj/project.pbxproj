@@ -603,6 +603,7 @@
 				DEVELOPMENT_TEAM = 26L85DSMMD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EasyPeriod/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Easy Period";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -634,6 +635,7 @@
 				DEVELOPMENT_TEAM = 26L85DSMMD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EasyPeriod/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Easy Period";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
