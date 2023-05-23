@@ -8,7 +8,7 @@
 "CalendarVC.buttonOne.delay" = "A commencé!!";
 "UserSettingsVC.periodLengthView.text" = "Durée de la période (en jours): ";
 "UserSettingsVC.cycleLengthView.text" = "Durée du cycle (en jours): ";
-"UserSettingsVC.previousDateView.text" = "Date des dernières période: ";
+"UserSettingsVC.previousDateView.text" = "Dernière période commencée: ";
 "UserSettingsVC.buttonCalculate" = "Calculer";
 "UserSettingsVC.NavigationBar.title" = "Paramètres";
 "UserSettingsVC.GoBackAlert.title" = "Fermer l'écran";
