@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WidgetKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -41,11 +42,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		// Called when the scene has moved from an inactive state to an active state.
 		// Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
 		UIApplication.shared.applicationIconBadgeNumber = 0
+//		WidgetCenter.shared.reloadAllTimelines()
 	}
 
 	func sceneWillResignActive(_ scene: UIScene) {
 		// Called when the scene will move from an active state to an inactive state.
 		// This may occur due to temporary interruptions (ex. an incoming phone call).
+		WidgetCenter.shared.reloadAllTimelines()
 	}
 
 	func sceneWillEnterForeground(_ scene: UIScene) {
