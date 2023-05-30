@@ -20,6 +20,7 @@
 		4A3D878E2A1622C20004053A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A3D878D2A1622C20004053A /* Main.storyboard */; };
 		4A3D87922A165F210004053A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4A3D87942A165F210004053A /* Localizable.strings */; };
 		4A3D87982A166EDD0004053A /* String+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3D87972A166EDD0004053A /* String+Extention.swift */; };
+		4A3D881E2A24DFCB0004053A /* Date+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3D881D2A24DFCB0004053A /* Date+Extention.swift */; };
 		4A4F523D29FAD9C6003638C5 /* DateCalculatiorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4F523C29FAD9C6003638C5 /* DateCalculatiorService.swift */; };
 		4A4F524029FBC878003638C5 /* DateFormatter+Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4F523F29FBC878003638C5 /* DateFormatter+Extention.swift */; };
 		4A6B636229F6E32500997332 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6B636129F6E32500997332 /* AppDelegate.swift */; };
@@ -76,6 +77,7 @@
 		4A3D87952A1660D50004053A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		4A3D87962A1660D50004053A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4A3D87972A166EDD0004053A /* String+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extention.swift"; sourceTree = "<group>"; };
+		4A3D881D2A24DFCB0004053A /* Date+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extention.swift"; sourceTree = "<group>"; };
 		4A4F523C29FAD9C6003638C5 /* DateCalculatiorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCalculatiorService.swift; sourceTree = "<group>"; };
 		4A4F523F29FBC878003638C5 /* DateFormatter+Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extention.swift"; sourceTree = "<group>"; };
 		4A6B635E29F6E32500997332 /* EasyPeriod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyPeriod.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,6 +141,7 @@
 			children = (
 				4A4F523F29FBC878003638C5 /* DateFormatter+Extention.swift */,
 				4A3D87972A166EDD0004053A /* String+Extention.swift */,
+				4A3D881D2A24DFCB0004053A /* Date+Extention.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				4A6B636229F6E32500997332 /* AppDelegate.swift in Sources */,
 				4A3D87982A166EDD0004053A /* String+Extention.swift in Sources */,
 				4A4F524029FBC878003638C5 /* DateFormatter+Extention.swift in Sources */,
+				4A3D881E2A24DFCB0004053A /* Date+Extention.swift in Sources */,
 				4ADC9B2F29FFBB550021F9BF /* DropDownDateView.swift in Sources */,
 				4A3D87102A123F960004053A /* Notifications.swift in Sources */,
 				4A77AC9F2A06841500A9E437 /* CalendarModel.swift in Sources */,

@@ -20,13 +20,13 @@ class DateCalculatiorService {
 			return nextDate
 		}
 
-		while nextDate < now {
+		while nextDate < now, !Calendar.current.isDate(now, equalTo: nextDate, toGranularity: .day) {
 			nextDate = Calendar.current.date(byAdding: .day, value: cycle, to: nextDate)!
 		}
 		nextDate = Calendar.current.date(byAdding: .day, value: -cycle, to: nextDate)!
 		let endDate = Calendar.current.date(byAdding: .day, value: period, to: nextDate)!
 		
-		if now > endDate {
+		if now > endDate, !Calendar.current.isDate(now, equalTo: endDate, toGranularity: .day) {
 			nextDate = Calendar.current.date(byAdding: .day, value: cycle, to: nextDate)!
 		}
 		return nextDate

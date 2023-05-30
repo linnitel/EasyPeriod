@@ -164,12 +164,17 @@ class UserSettingsVC: UIViewController {
 		}
 		UserProfileService.shared.setSettings(model)
 
+		// Setap notification
 		let now = Date()
-		if periodStartDate <= now {
+		if periodStartDate < now ||
+			Calendar.current.isDate(now, equalTo: periodStartDate, toGranularity: .day) ||
+			Calendar.current.isDate(now, equalTo: Calendar.current.date(byAdding: .day, value: -1, to: periodStartDate)!, toGranularity: .day) {
 			periodStartDate = DateCalculatiorService.shared.getNextPriodDate(periodStartDate, cycle: cycleLength)
 		}
 		let timeInterval = DateCalculatiorService.shared.calculateTimeInterval(to: periodStartDate)
-		self.notifications.scheduleNotification(for: timeInterval)
+		if timeInterval > 0 {
+			self.notifications.scheduleNotification(for: timeInterval)
+		}
 
 		self.coordinator?.closeSettings()
 	}
