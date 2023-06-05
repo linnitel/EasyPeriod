@@ -14,22 +14,24 @@ class CalendarVC: UIViewController {
 
 	private var calendarModel: CalendarModel?
 
-	private var accentColor: UIColor = UIColor(named: "mainColor")! {
+	let notificationName: Notification.Name = .NSCalendarDayChanged
+
+	private var mainColor: UIColor = UIColor(named: "mainColor")! {
 		didSet {
-			self.descriptionText.textColor = self.accentColor
-			self.buttonOne.backgroundColor = self.accentColor
-			self.buttonTwo.backgroundColor = self.accentColor
-			self.navigationItem.rightBarButtonItem?.tintColor = self.accentColor
-			self.shape.dropColor = self.accentColor
+			self.descriptionText.textColor = self.mainColor
+			self.buttonOne.backgroundColor = self.mainColor
+			self.buttonTwo.backgroundColor = self.mainColor
+			self.navigationItem.rightBarButtonItem?.tintColor = self.mainColor
+			self.shape.dropColor = self.mainColor
 		}
 	}
-	private var mainColor: UIColor = .white {
+	private var accentColor: UIColor = .white {
 		didSet {
-			self.buttonOne.setTitleColor(self.mainColor, for: .normal)
-			self.buttonTwo.setTitleColor(self.mainColor, for: .normal)
-			self.nextPeriodDate.textColor = self.mainColor
-			self.nextPeriodMonthAndWeek.textColor = self.mainColor
-			self.view.backgroundColor = self.mainColor
+			self.buttonOne.setTitleColor(self.accentColor, for: .normal)
+			self.buttonTwo.setTitleColor(self.accentColor, for: .normal)
+			self.nextPeriodDate.textColor = self.accentColor
+			self.nextPeriodMonthAndWeek.textColor = self.accentColor
+			self.view.backgroundColor = self.accentColor
 		}
 	}
 
@@ -66,7 +68,7 @@ class CalendarVC: UIViewController {
 	private lazy var buttonOne: UIButton = {
 		let button = UIButton()
 		button.translatesAutoresizingMaskIntoConstraints = false
-		button.backgroundColor = self.accentColor
+		button.backgroundColor = self.mainColor
 		button.layer.cornerRadius = 28
 		button.addTarget(self, action: #selector(self.buttonOneAction), for: .touchUpInside)
 		return button
@@ -75,10 +77,10 @@ class CalendarVC: UIViewController {
 	private lazy var buttonTwo: UIButton = {
 		let button = UIButton()
 		button.translatesAutoresizingMaskIntoConstraints = false
-		button.backgroundColor = self.accentColor
+		button.backgroundColor = self.mainColor
 		button.layer.cornerRadius = 28
 		button.addTarget(self, action: #selector(self.buttonTwoAction), for: .touchUpInside)
-		button.setTitleColor(self.mainColor, for: .normal)
+		button.setTitleColor(self.accentColor, for: .normal)
 		return button
 	}()
 
@@ -88,6 +90,10 @@ class CalendarVC: UIViewController {
 		self.setupViews()
 		self.setupConstraints()
 		self.setupNavigationBar()
+
+		NotificationCenter.default.addObserver(self, selector: #selector(calendarDayDidChange), name: notificationName, object: nil)
+
+		NotificationCenter.default.addObserver(self, selector: #selector(appWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
 	}
 
 	override func viewWillAppear(_ animated: Bool) {
@@ -106,30 +112,30 @@ class CalendarVC: UIViewController {
 					self.descriptionText.text = "CalendarVC.descriptionText.notSet".localized()
 					self.buttonTwo.isHidden = true
 					self.buttonOne.isHidden = true
-					self.accentColor = UIColor(named: "mainColor")!
-					self.mainColor = .white
+					self.mainColor = UIColor(named: "mainColor")!
+					self.accentColor = .white
 				case .offPeriod:
 					self.descriptionText.text = "CalendarVC.descriptionText.offPeriod".localized()
 					self.buttonOne.setTitle("CalendarVC.buttonOne.offPeriod".localized(), for: .normal)
 					self.buttonOne.isHidden = false
 					self.buttonTwo.isHidden = true
-					self.accentColor = UIColor(named: "mainColor")!
-					self.mainColor = .white
+					self.mainColor = UIColor(named: "mainColor")!
+					self.accentColor = .white
 				case .period:
 					self.descriptionText.text = "CalendarVC.descriptionText.period".localized()
 					self.buttonOne.setTitle("CalendarVC.buttonOne.period".localized(), for: .normal)
 					self.buttonTwo.setTitle("CalendarVC.buttonTwo.period".localized(), for: .normal)
-					self.accentColor = .white
+					self.mainColor = .white
 					self.buttonOne.isHidden = false
 					self.buttonTwo.isHidden = false
-					self.mainColor = UIColor(named: "mainColor")!
+					self.accentColor = UIColor(named: "mainColor")!
 				case .delay:
 					self.descriptionText.text = "CalendarVC.descriptionText.delay".localized()
 					self.buttonOne.setTitle("CalendarVC.buttonOne.delay".localized(), for: .normal)
 					self.buttonTwo.isHidden = true
 					self.buttonOne.isHidden = false
-					self.accentColor = UIColor(named: "mainColor")!
-					self.mainColor = .white
+					self.mainColor = UIColor(named: "mainColor")!
+					self.accentColor = .white
 			}
 		}
 	}
@@ -184,7 +190,7 @@ class CalendarVC: UIViewController {
 			target: self,
 			action: #selector(action)
 		)
-		navigationItem.rightBarButtonItem?.tintColor = self.accentColor
+		navigationItem.rightBarButtonItem?.tintColor = self.mainColor
 	}
 
 	@objc func action() {
@@ -272,5 +278,19 @@ class CalendarVC: UIViewController {
 		dialogMessage.addAction(cancel)
 		// Present alert message to user
 		self.present(dialogMessage, animated: true, completion: nil)
+	}
+
+	// MARK: App Cicle Mode
+	@objc func appWillEnterForeground() {
+		self.fetchData()
+		self.setupContent()
+	}
+
+	// MARK: App Calendar Did Change
+
+	@objc func calendarDayDidChange() {
+		print("Day did change")
+		self.fetchData()
+		self.setupContent()
 	}
 }

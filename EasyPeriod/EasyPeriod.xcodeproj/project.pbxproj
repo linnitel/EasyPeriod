@@ -35,6 +35,7 @@
 		4A77AC9F2A06841500A9E437 /* CalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A77AC9D2A06841500A9E437 /* CalendarModel.swift */; };
 		4A77ACA02A06841500A9E437 /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A77AC9E2A06841500A9E437 /* CalendarVC.swift */; };
 		4ADC9B2F29FFBB550021F9BF /* DropDownDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC9B2E29FFBB550021F9BF /* DropDownDateView.swift */; };
+		4AFECF9A2A2DF051004880A9 /* DateCalculatiorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4F523C29FAD9C6003638C5 /* DateCalculatiorService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -361,6 +362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A3D87872A14D7790004053A /* DateFormatter+Extention.swift in Sources */,
+				4AFECF9A2A2DF051004880A9 /* DateCalculatiorService.swift in Sources */,
 				4A3D87782A14D7620004053A /* PeriodWidgetBundle.swift in Sources */,
 				4A3D877C2A14D7630004053A /* PeriodWidget.swift in Sources */,
 				4A3D878C2A1544820004053A /* CalendarModel.swift in Sources */,

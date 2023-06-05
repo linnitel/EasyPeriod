@@ -19,19 +19,26 @@ struct Provider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
+		let currentDate = Date()
 
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 3 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-			let settings = UserProfileService.shared.getSettings()
-            let entry = SimpleEntry(settings: settings)
-            entries.append(entry)
-        }
+		let midnight = Calendar.current.startOfDay(for: currentDate)
+		let nextMidnight = Calendar.current.date(byAdding: .day, value: 1, to: midnight)!
 
-        let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
+		var settings = UserProfileService.shared.getSettings()
+		let periodStartDate = DateCalculatiorService.shared.calculateStartDate(settings.startDate, cycle: settings.cycle, period: settings.period)
+		let periodEndDate = DateCalculatiorService.shared.calculateEndDate(periodStartDate, period: settings.period)
+		if settings.partOfCycle != .delay {
+			let isPeriodCheck = DateCalculatiorService.shared.isPeriod(startDate: periodStartDate, endDate: periodEndDate)
+			if isPeriodCheck {
+				settings.partOfCycle = .period
+			} else {
+				settings.partOfCycle = .offPeriod
+			}
+		}
+		let entries: [SimpleEntry] = [SimpleEntry(settings: settings)]
+
+		let timeline = Timeline(entries: entries, policy: .after(nextMidnight))
+		completion(timeline)
     }
 }
 

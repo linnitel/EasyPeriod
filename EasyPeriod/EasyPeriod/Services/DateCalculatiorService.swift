@@ -23,14 +23,29 @@ class DateCalculatiorService {
 		while nextDate < now, !Calendar.current.isDate(now, equalTo: nextDate, toGranularity: .day) {
 			nextDate = Calendar.current.date(byAdding: .day, value: cycle, to: nextDate)!
 		}
+
 		nextDate = Calendar.current.date(byAdding: .day, value: -cycle, to: nextDate)!
 		let endDate = Calendar.current.date(byAdding: .day, value: period, to: nextDate)!
-		
+
 		if now > endDate, !Calendar.current.isDate(now, equalTo: endDate, toGranularity: .day) {
 			nextDate = Calendar.current.date(byAdding: .day, value: cycle, to: nextDate)!
 		}
 		return nextDate
 	}
+
+//	func checkPeriodsStatus(startDate: Date, endDate: Date) -> 
+
+//	func calculatePeriods(_ startDate: Date, cycle: Int, period: Int) -> Date {
+//		let now = Date()
+//		var periodDate = startDate
+//		periodDate = Calendar.current.date(byAdding: .day, value: -cycle, to: periodDate)!
+//		let endDate = Calendar.current.date(byAdding: .day, value: period, to: periodDate)!
+//
+//		if now > endDate, !Calendar.current.isDate(now, equalTo: endDate, toGranularity: .day) {
+//			periodDate = Calendar.current.date(byAdding: .day, value: cycle, to: periodDate)!
+//		}
+//		return periodDate
+//	}
 
 	func calculateEndDate(_ startDate: Date, period: Int) -> Date {
 		Calendar.current.date(byAdding: .day, value: period, to: startDate)!
